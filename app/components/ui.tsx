@@ -94,12 +94,19 @@ export function BrandLockup({
   studio,
   small,
   onLight,
+  imageUrl,
 }: {
   name: string;
   studio: string;
   small?: boolean;
   onLight?: boolean;
+  imageUrl?: string | null;
 }) {
+  if (imageUrl) {
+    const imgCls = ["brand-img", small ? "brand-img--sm" : ""].filter(Boolean).join(" ");
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={imageUrl} alt={`${name} ${studio}`} className={imgCls} />;
+  }
   const cls = ["brand", small ? "sm" : "", onLight ? "brand--onlight" : ""].filter(Boolean).join(" ");
   return (
     <span className={cls} aria-label={`${name} ${studio}`}>

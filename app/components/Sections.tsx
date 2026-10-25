@@ -4,7 +4,7 @@ import { BrandLockup, Figure, Icon, Stars } from "./ui";
 type P = { c: SiteContent };
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-export function Hero({ c }: P) {
+export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
   const book = c.contact.freshaBooking || c.contact.freshaProfile;
   return (
     <header className="hero">
@@ -24,7 +24,7 @@ export function Hero({ c }: P) {
               {c.brand.studio} · {c.contact.address.city}
             </span>
             <h1 style={{ margin: 0 }}>
-              <BrandLockup name={c.brand.name} studio={c.brand.studio} onLight />
+              <BrandLockup name={c.brand.name} studio={c.brand.studio} onLight imageUrl={logoUrl} />
             </h1>
             <p className="script">{c.brand.tagline}</p>
             <p className="lead">
@@ -226,14 +226,14 @@ export function Location({ c }: P) {
   );
 }
 
-export function Footer({ c }: P) {
+export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
   const book = c.contact.freshaBooking || c.contact.freshaProfile;
   const a = c.contact.address;
   return (
     <footer className="foot">
       <div className="wrap">
         <div className="top">
-          <BrandLockup name={c.brand.name} studio={c.brand.studio} />
+          <BrandLockup name={c.brand.name} studio={c.brand.studio} imageUrl={logoUrl} />
           <p className="lead" style={{ color: "var(--nude)", maxWidth: "40ch" }}>
             {c.brand.tagline}
           </p>

@@ -1,0 +1,28 @@
+LOGÓTIPOS — largue aqui os ficheiros reais (drop-in)
+=====================================================
+
+O site deteta automaticamente estes ficheiros e substitui a recriação
+tipográfica do "AD". Use EXATAMENTE estes nomes:
+
+1) lockup.svg   (ou lockup.png / lockup.webp)   ← MAIS IMPORTANTE
+   - O lockup completo (AD + AMANDA DOMINGUES + BEAUTY STUDIO)
+   - FUNDO TRANSPARENTE (sem fundo preto nem "nuvem" branca)
+   - SVG é o ideal (nítido em qualquer tamanho). Se for PNG, use alta resolução.
+   - Usado no HERO (fundo claro) e no RODAPÉ (fundo escuro).
+
+2) lockup-dark.png   (ou .webp)
+   - O lockup rose-gold sobre fundo ESCURO (aquela versão bonita no preto).
+   - Usado como imagem de partilha (Open Graph) no Google/WhatsApp/Instagram.
+   - Ideal ~1200x630.
+
+3) monogram.svg   (ou monogram.png)
+   - Só o "AD", FUNDO TRANSPARENTE, recorte limpo.
+   - Para favicon/ícone (passo seguinte).
+
+Notas:
+- O monograma que tinha o fundo "nuvem" branca com franjas NÃO serve —
+  exporte limpo (Canva Pro / Illustrator) como PNG transparente ou SVG.
+- Depois de largar os ficheiros: em DEV basta recarregar a página;
+  em produção, um novo build/deploy.
+
+Como largar: arraste os ficheiros para esta pasta (public/logo/) no VS Code/Finder.

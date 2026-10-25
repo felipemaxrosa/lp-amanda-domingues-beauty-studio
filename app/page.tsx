@@ -1,4 +1,5 @@
 import { getContent } from "@/lib/content";
+import { getLogoAssets } from "@/lib/assets";
 import { Hero, Services, Gallery, About, Prices, Testimonials, Location, Footer } from "./components/Sections";
 import { JsonLd } from "./components/JsonLd";
 
@@ -6,9 +7,10 @@ export const revalidate = 60;
 
 export default async function Home() {
   const c = await getContent();
+  const logo = getLogoAssets();
   return (
     <>
-      <Hero c={c} />
+      <Hero c={c} logoUrl={logo.lockup} />
       <main>
         <Services c={c} />
         <Gallery c={c} />
@@ -17,7 +19,7 @@ export default async function Home() {
         <Testimonials c={c} />
         <Location c={c} />
       </main>
-      <Footer c={c} />
+      <Footer c={c} logoUrl={logo.lockup} />
       <JsonLd c={c} />
     </>
   );
