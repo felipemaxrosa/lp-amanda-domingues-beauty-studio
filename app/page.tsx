@@ -10,7 +10,7 @@ export default async function Home() {
   const logo = getLogoAssets();
   return (
     <>
-      <Hero c={c} logoUrl={logo.lockup} />
+      <Hero c={c} logoUrl={logo.lockup} monogramUrl={logo.monogram} />
       <main>
         <Services c={c} />
         <Gallery c={c} />

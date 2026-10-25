@@ -4,13 +4,27 @@ import { BrandLockup, Figure, Icon, Stars } from "./ui";
 type P = { c: SiteContent };
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
+export function Hero({
+  c,
+  logoUrl,
+  monogramUrl,
+}: P & { logoUrl?: string | null; monogramUrl?: string | null }) {
   const book = c.contact.freshaBooking || c.contact.freshaProfile;
   return (
     <header className="hero">
       <div className="wrap">
         <div className="topnav">
-          <BrandLockup name={c.brand.name} studio={c.brand.studio} small onLight />
+          <span className="hdr-brand" aria-label={`${c.brand.name} ${c.brand.studio}`}>
+            {monogramUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img className="hdr-mono" src={monogramUrl} alt="" />
+            ) : (
+              <span className="brand sm brand--onlight">
+                <span className="mono">AD</span>
+              </span>
+            )}
+            <span className="hdr-name">{c.brand.name}</span>
+          </span>
           <nav aria-label="Navegação principal">
             <a href="#servicos">Serviços</a>
             <a href="#sobre">Sobre</a>
@@ -51,6 +65,7 @@ export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
             caption="Retrato / ambiente"
             tag={c.heroImageUrl ? undefined : "referência"}
             imageUrl={c.heroImageUrl}
+            alt="Estúdio Amanda Domingues Beauty Studio, em Fonte da Cheira, Coimbra"
           />
         </div>
       </div>
