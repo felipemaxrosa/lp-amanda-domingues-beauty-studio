@@ -1,0 +1,552 @@
+<title>Amanda Domingues Beauty Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Layout: três landing pages da mesma marca num seletor; bandas full-width + wrapper central com gutter. Mundo visual único (paleta quente da marca). */
+  :root{
+    color-scheme: light;
+    --rose:#DBA7A0; --rose-soft:#F1DAD4; --rose-deep:#C98C84;
+    --nude:#EBD6CC; --nude-soft:#F6E9E1;
+    --gold:#D4AF7C; --gold-deep:#B9914F;
+    --brown:#5B3F36; --brown-deep:#3C2922;
+    --cream:#FBF7F4; --white:#FFFFFF;
+    --muted:#8A6E62;
+    --line: rgba(91,63,54,.14);
+    --shadow: 0 18px 44px -24px rgba(60,41,34,.45);
+    --f-display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --f-body:"Jost", "Helvetica Neue", Arial, sans-serif;
+    --f-script:"Petit Formal Script", "Cormorant Garamond", cursive;
+    --bar-h:3.25rem;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--cream); color:var(--brown); font-family:var(--f-body); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:60; background:var(--cream);}
+  img{max-width:100%}
+  a{color:inherit}
+  h1,h2,h3,h4{font-family:var(--f-display); font-weight:600; line-height:1.08; text-wrap:balance; margin:0; color:var(--brown);}
+  p{margin:0}
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+  .band{padding-block:clamp(3rem,7vw,6rem);}
+
+  /* ---------- seletor ---------- */
+  .switch{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background:var(--cream); border-bottom:1px solid var(--line); min-height:var(--bar-h);}
+  .switch .wrap{display:flex; align-items:center; justify-content:space-between; gap:.75rem 1rem; padding-block:.55rem; flex-wrap:wrap;}
+  .switch .tag{font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:.5rem;}
+  .switch .tag b{color:var(--brown); font-weight:600; letter-spacing:.06em;}
+  .tabs{display:flex; gap:.35rem; background:var(--white); border:1px solid var(--line); border-radius:999px; padding:.25rem;}
+  .tab{appearance:none; border:0; cursor:pointer; background:transparent; color:var(--brown); font-family:var(--f-body); font-size:.78rem; letter-spacing:.03em; padding:.42rem .8rem; border-radius:999px; white-space:nowrap; transition:background .2s,color .2s;}
+  .tab[aria-selected="true"]{background:var(--brown); color:var(--cream);}
+  .tab:focus-visible{outline:2px solid var(--gold-deep); outline-offset:2px;}
+
+  /* ---------- botões ---------- */
+  .btn{display:inline-flex; align-items:center; gap:.5rem; font-family:var(--f-body); font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; padding:.95rem 1.6rem; border-radius:2px; transition:transform .15s, box-shadow .2s, background .2s, color .2s; cursor:pointer; border:1px solid transparent;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--brown); color:var(--cream);}
+  .btn-primary:hover{background:var(--brown-deep);}
+  .btn-ghost{background:transparent; color:var(--brown); border-color:var(--brown);}
+  .btn-ghost:hover{background:var(--brown); color:var(--cream);}
+  .btn-rose{background:var(--rose); color:var(--brown-deep);}
+  .btn-rose:hover{background:var(--rose-deep); color:var(--white);}
+  .btn-round{border-radius:999px;}
+  .btn svg{width:1.05em; height:1.05em;}
+
+  /* ---------- rating ---------- */
+  .stars{display:inline-flex; gap:.1rem; color:var(--gold-deep);}
+  .stars svg{width:1rem; height:1rem;}
+  .rating{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; font-size:.82rem; color:var(--muted); letter-spacing:.04em;}
+  .rating b{color:var(--brown); font-weight:600;}
+
+  /* ---------- placeholders de foto ---------- */
+  .ph{position:relative; border-radius:3px; overflow:hidden; display:grid; place-items:center; background:
+      radial-gradient(120% 90% at 20% 10%, rgba(255,255,255,.55), transparent 55%),
+      linear-gradient(145deg, var(--nude-soft), var(--rose) 72%, var(--gold-deep));
+      color:var(--brown-deep); min-height:120px;}
+  .ph--nude{background:radial-gradient(120% 90% at 20% 10%, rgba(255,255,255,.6), transparent 55%), linear-gradient(145deg,var(--nude-soft),var(--nude) 60%,var(--rose-soft));}
+  .ph--rose{background:radial-gradient(120% 90% at 80% 15%, rgba(255,255,255,.5), transparent 55%), linear-gradient(135deg,var(--rose-soft),var(--rose) 75%,var(--rose-deep)); color:var(--brown-deep);}
+  .ph--brown{background:radial-gradient(130% 90% at 25% 15%, rgba(212,175,124,.5), transparent 55%), linear-gradient(140deg,var(--brown),var(--brown-deep)); color:var(--nude-soft);}
+  .ph-ic{width:30%; max-width:72px; min-width:38px; opacity:.55;}
+  .ph-cap{position:absolute; left:.7rem; bottom:.6rem; font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; opacity:.72;}
+  .ph-tag{position:absolute; right:.6rem; top:.6rem; font-size:.52rem; letter-spacing:.18em; text-transform:uppercase; opacity:.6; border:1px solid currentColor; border-radius:999px; padding:.12rem .45rem;}
+
+  /* ---------- ícones de serviço ---------- */
+  .svc-ic{width:2.2rem; height:2.2rem; color:var(--gold-deep);}
+
+  /* eyebrow */
+  .eyebrow{font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold-deep); font-weight:500;}
+  .script{font-family:var(--f-script); color:var(--rose-deep); font-weight:400; line-height:1;}
+  .lead{color:var(--muted); font-size:1.02rem;}
+  .hr-gold{height:1px; background:var(--gold); border:0; opacity:.6;}
+
+  /* monograma */
+  .logo{font-family:var(--f-display); line-height:.9; text-align:center; color:var(--brown);}
+  .logo .mono{font-size:1.9rem; letter-spacing:.04em; color:var(--gold-deep); font-weight:600;}
+  .logo .nm{font-size:.74rem; letter-spacing:.26em; text-transform:uppercase; margin-top:.15rem;}
+  .logo .sub{font-size:.52rem; letter-spacing:.42em; text-transform:uppercase; color:var(--muted);}
+
+  .model[hidden]{display:none !important;}
+
+  /* ========================================================= MODELO A — EDITORIAL LUXE */
+  .m-a{background:var(--cream);}
+  .m-a .topnav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:1.4rem; border-bottom:1px solid var(--line); flex-wrap:wrap;}
+  .m-a .topnav nav{display:flex; gap:1.6rem; font-size:.74rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); flex-wrap:wrap;}
+  .m-a .hero{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(1.5rem,4vw,4rem); align-items:center; padding-block:clamp(2.5rem,6vw,5rem);}
+  .m-a .hero h1{font-size:clamp(3rem,8vw,5.6rem); font-weight:500; letter-spacing:-.01em;}
+  .m-a .hero .script{font-size:clamp(2.1rem,5vw,3rem); margin:.3rem 0 1.2rem;}
+  .m-a .hero .lead{max-width:40ch; margin-bottom:1.8rem;}
+  .m-a .hero-cta{display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:1.6rem;}
+  .m-a .hero .ph{aspect-ratio:4/5; box-shadow:var(--shadow);}
+  .m-a .svc{display:grid; gap:0;}
+  .m-a .svc-row{display:grid; grid-template-columns:auto 1fr auto; gap:1.2rem; align-items:center; padding-block:1.5rem; border-top:1px solid var(--line);}
+  .m-a .svc-row:last-child{border-bottom:1px solid var(--line);}
+  .m-a .svc-no{font-family:var(--f-display); font-size:1.1rem; color:var(--gold-deep);}
+  .m-a .svc-row h3{font-size:clamp(1.6rem,3.4vw,2.3rem); font-weight:500;}
+  .m-a .svc-row .b{color:var(--muted); font-size:.9rem; letter-spacing:.02em;}
+  .m-a .svc-row .pr{font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; color:var(--brown); white-space:nowrap;}
+  .m-a .gallery{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:120px; gap:.8rem;}
+  .m-a .gallery .ph:nth-child(1){grid-column:span 2; grid-row:span 2;}
+  .m-a .gallery .ph:nth-child(4){grid-row:span 2;}
+  .m-a .about{display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(1.5rem,4vw,3.5rem); align-items:center;}
+  .m-a .about .ph{aspect-ratio:3/4; box-shadow:var(--shadow);}
+  .m-a .about .pq{font-family:var(--f-script); color:var(--rose-deep); font-size:clamp(1.6rem,3vw,2.2rem); line-height:1.1; margin:1rem 0;}
+  .m-a .prices{display:grid; grid-template-columns:1fr 1fr; gap:.2rem 3rem;}
+  .m-a .price-row{display:flex; align-items:baseline; gap:.6rem; padding-block:.7rem; border-bottom:1px dotted var(--line);}
+  .m-a .price-row .nm{font-family:var(--f-display); font-size:1.2rem;}
+  .m-a .price-row .dots{flex:1; border-bottom:1px dotted var(--line); transform:translateY(-.25rem);}
+  .m-a .price-row .pr{font-variant-numeric:tabular-nums; font-weight:600;}
+  .m-a .price-row .du{color:var(--muted); font-size:.75rem; margin-left:.4rem;}
+  .m-a .quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem;}
+  .m-a .quote{border-top:2px solid var(--gold);}
+  .m-a .quote p{font-family:var(--f-display); font-style:italic; font-size:1.3rem; line-height:1.4; margin:1rem 0 .8rem;}
+  .m-a .quote .who{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);}
+  .m-a .finale{display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.5rem,4vw,3rem); align-items:center;}
+  .m-a .finale .ph{aspect-ratio:16/10;}
+
+  /* ========================================================= MODELO B — ACOLHEDOR */
+  .m-b{background:linear-gradient(180deg,var(--rose-soft),var(--cream) 46%);}
+  .m-b .topnav{display:flex; flex-direction:column; align-items:center; gap:.6rem; padding-block:1.5rem; text-align:center;}
+  .m-b .topnav a{font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:.15rem;}
+  .m-b .hero{text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.1rem; padding-block:clamp(1.5rem,4vw,3rem) clamp(2.5rem,6vw,4rem);}
+  .m-b .hero .script{font-size:clamp(2.6rem,8vw,4.4rem);}
+  .m-b .hero h1{font-size:clamp(1.3rem,3vw,1.7rem); font-weight:500; letter-spacing:.02em;}
+  .m-b .hero .lead{max-width:48ch;}
+  .m-b .hero-cta{display:flex; gap:.8rem; flex-wrap:wrap; justify-content:center;}
+  .m-b .hero .ph{width:100%; max-width:860px; aspect-ratio:16/8; border-radius:200px/120px; box-shadow:var(--shadow); margin-top:1rem;}
+  .m-b .cards{display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem;}
+  .m-b .card{background:var(--white); border-radius:22px; padding:1.8rem 1.4rem; text-align:center; box-shadow:0 14px 34px -26px rgba(60,41,34,.5); display:flex; flex-direction:column; align-items:center; gap:.7rem;}
+  .m-b .card .badge{width:3.6rem; height:3.6rem; border-radius:999px; background:var(--rose-soft); display:grid; place-items:center;}
+  .m-b .card .badge svg{width:1.8rem; height:1.8rem; color:var(--brown);}
+  .m-b .card h3{font-size:1.5rem; font-weight:600;}
+  .m-b .card p{color:var(--muted); font-size:.88rem;}
+  .m-b .card .pr{font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-deep); margin-top:.1rem;}
+  .m-b .about{display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(1.5rem,4vw,3rem); align-items:center; background:var(--white); border-radius:28px; padding:clamp(1.4rem,3vw,2.6rem); box-shadow:var(--shadow);}
+  .m-b .about .ph{aspect-ratio:1/1; border-radius:28px;}
+  .m-b .about .sig{font-family:var(--f-script); color:var(--rose-deep); font-size:1.8rem; margin-top:.8rem;}
+  .m-b .quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;}
+  .m-b .quote{background:var(--white); border-radius:22px; padding:1.6rem; box-shadow:0 14px 34px -26px rgba(60,41,34,.5); display:flex; flex-direction:column; gap:.8rem;}
+  .m-b .quote p{font-size:1rem;}
+  .m-b .quote .who{font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
+  .m-b .gallery{display:grid; grid-template-columns:repeat(4,1fr); gap:.8rem;}
+  .m-b .gallery .ph{aspect-ratio:1/1; border-radius:18px;}
+  .m-b .finale{text-align:center; background:var(--brown); color:var(--nude-soft); border-radius:28px; padding:clamp(2rem,5vw,3.4rem); display:flex; flex-direction:column; align-items:center; gap:1rem;}
+  .m-b .finale h2{color:var(--cream); font-size:clamp(2rem,5vw,3rem);}
+  .m-b .finale .lead{color:var(--nude);}
+
+  /* ========================================================= MODELO C — MINIMAL CONVERSÃO */
+  .m-c{background:var(--white);}
+  .m-c .bookbar{position:sticky; top:calc(env(safe-area-inset-top,0px) + var(--bar-h)); z-index:30; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .m-c .bookbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.7rem;}
+  .m-c .bookbar .logo{text-align:left; display:flex; align-items:baseline; gap:.5rem;}
+  .m-c .bookbar .logo .mono{font-size:1.4rem;}
+  .m-c .bookbar .logo .nm{font-size:.6rem; margin:0;}
+  .m-c .bookbar-cta{display:flex; align-items:center; gap:.6rem;}
+  .m-c .bookbar .btn{padding:.6rem 1.1rem;}
+  .m-c .hero{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(1.5rem,4vw,3rem); align-items:center; padding-block:clamp(2rem,5vw,3.5rem);}
+  .m-c .hero h1{font-size:clamp(2.3rem,5.5vw,3.6rem); font-weight:500;}
+  .m-c .hero h1 em{font-style:normal; color:var(--rose-deep); font-family:var(--f-script); display:inline-block;}
+  .m-c .hero .lead{margin:1rem 0 1.6rem; max-width:44ch;}
+  .m-c .hero-cta{display:flex; gap:.7rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem;}
+  .m-c .hero .ph{aspect-ratio:5/4; border-radius:6px; box-shadow:var(--shadow);}
+  .m-c .trust{display:flex; gap:1.4rem; flex-wrap:wrap; border-block:1px solid var(--line); padding-block:1rem; justify-content:space-between;}
+  .m-c .trust .t{text-align:center; flex:1; min-width:110px;}
+  .m-c .trust .t b{font-family:var(--f-display); font-size:1.7rem; display:block; color:var(--brown); line-height:1;}
+  .m-c .trust .t span{font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);}
+  .m-c .grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
+  .m-c .scard{border:1px solid var(--line); border-radius:8px; padding:1.4rem; display:flex; flex-direction:column; gap:.6rem; background:var(--cream);}
+  .m-c .scard svg.svc-ic{width:1.8rem; height:1.8rem;}
+  .m-c .scard h3{font-size:1.35rem; font-weight:600;}
+  .m-c .scard p{color:var(--muted); font-size:.84rem; flex:1;}
+  .m-c .scard .pr{font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-deep); font-weight:600;}
+  .m-c .scard a{margin-top:.3rem; font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; color:var(--brown); border-bottom:1px solid var(--gold); align-self:flex-start; padding-bottom:.15rem;}
+  .m-c .ptable{display:grid; grid-template-columns:1fr 1fr; gap:0 2.5rem;}
+  .m-c .ptable .row{display:flex; align-items:baseline; justify-content:space-between; gap:.6rem; padding-block:.65rem; border-bottom:1px solid var(--line); font-size:.95rem;}
+  .m-c .ptable .row .pr{font-variant-numeric:tabular-nums; font-weight:600; white-space:nowrap;}
+  .m-c .gallery{display:grid; grid-template-columns:repeat(6,1fr); gap:.6rem;}
+  .m-c .gallery .ph{aspect-ratio:1/1; border-radius:5px;}
+  .m-c .locrow{display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center;}
+  .m-c .locrow .ph{aspect-ratio:16/9; border-radius:8px;}
+  .m-c .finale{text-align:center; background:var(--nude-soft); border-radius:12px; padding:clamp(2rem,5vw,3rem); display:flex; flex-direction:column; align-items:center; gap:1rem;}
+
+  /* ---------- footer compartilhado ---------- */
+  .foot{background:var(--brown-deep); color:var(--nude); }
+  .foot .wrap{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:2rem; padding-block:3rem;}
+  .foot h4{color:var(--cream); font-size:1.6rem; font-weight:500;}
+  .foot .sub{color:var(--gold); font-size:.6rem; letter-spacing:.4em; text-transform:uppercase; margin-top:.3rem;}
+  .foot p, .foot a{color:var(--nude); font-size:.9rem; text-decoration:none;}
+  .foot a:hover{color:var(--gold);}
+  .foot .lbl{font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem;}
+  .foot .col{display:flex; flex-direction:column; gap:.4rem;}
+  .foot .legal{border-top:1px solid rgba(235,214,204,.18); padding-block:1.2rem; font-size:.72rem; color:rgba(235,214,204,.6);}
+  .foot .legal .wrap{display:flex; justify-content:space-between; gap:1rem; padding-block:0; flex-wrap:wrap;}
+  .sec-head{display:flex; flex-direction:column; gap:.5rem; margin-bottom:2rem; max-width:52ch;}
+  .sec-head h2{font-size:clamp(2rem,4.5vw,3rem); font-weight:500;}
+
+  @media (max-width:860px){
+    .m-a .hero, .m-a .about, .m-a .finale, .m-b .about, .m-c .hero, .m-c .locrow{grid-template-columns:1fr;}
+    .m-a .prices, .m-c .ptable{grid-template-columns:1fr; gap:0;}
+    .m-a .quotes, .m-b .quotes{grid-template-columns:1fr;}
+    .m-b .cards, .m-c .grid{grid-template-columns:1fr 1fr;}
+    .foot .wrap{grid-template-columns:1fr;}
+    .m-a .about .order-ph{order:-1;}
+  }
+  @media (max-width:520px){
+    .m-b .cards, .m-c .grid{grid-template-columns:1fr;}
+    .m-a .gallery{grid-template-columns:1fr 1fr;}
+    .m-c .gallery{grid-template-columns:1fr 1fr 1fr;}
+    .m-a .svc-row{grid-template-columns:auto 1fr; }
+    .m-a .svc-row .pr{grid-column:2; }
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+
+<!-- sprite de ícones -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-nail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 21h8M9 21V9a3 3 0 0 1 6 0v12M9 9c0-3 1-6 3-6s3 3 3 6"/></symbol>
+  <symbol id="i-makeup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20l6-6M14 10l5-5a2 2 0 0 0-3-3l-5 5M10 14l-1 1 1 1 1-1M11 7l6 6"/><path d="M8 16c-2 2-3 2-4 4 2-1 2-2 4-4z"/></symbol>
+  <symbol id="i-hair" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 20c-1-5 0-11 6-13 5-1 7 3 5 6-2 2-5 1-5 1M12 20c3 0 6-1 6-4"/></symbol>
+  <symbol id="i-brow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 13c3-4 11-5 18-2M6 11.4l-1-2M10 10.2l-.6-2.1M14 10.3l.4-2M18 11.6l1-1.8"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.8.7-5 4.6 1.4 6.7L12 17.8 5.9 20.9 7.3 14.2l-5-4.6 6.8-.7z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.7-5A8 8 0 1 1 8 19.3z"/><path d="M8.5 9c.2 2.5 4 6.3 6.5 6.5.8.06 1.7-.8 2-1.5l-2-1.3-1.2 1a7 7 0 0 1-3.3-3.3l1-1.2L10.2 7C9.5 7.3 8.6 8.2 8.5 9z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 9h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M10 7c-3 1-5 3.5-5 7v3h5v-5H7c0-2 1-3.5 3-4zm9 0c-3 1-5 3.5-5 7v3h5v-5h-3c0-2 1-3.5 3-4z"/></symbol>
+</svg>
+
+<!-- ============ SELETOR ============ -->
+<header class="switch">
+  <div class="wrap">
+    <span class="tag"><b>Amanda Domingues Beauty Studio</b> · pré-visualização</span>
+    <div class="tabs" role="tablist" aria-label="Escolher modelo de UI">
+      <button class="tab" role="tab" data-m="a" aria-selected="true">A · Editorial</button>
+      <button class="tab" role="tab" data-m="b" aria-selected="false">B · Acolhedor</button>
+      <button class="tab" role="tab" data-m="c" aria-selected="false">C · Minimal</button>
+    </div>
+  </div>
+</header>
+
+<!-- ================================================================= MODELO A -->
+<main id="model-a" class="model m-a">
+  <div class="wrap">
+    <div class="topnav">
+      <div class="logo" style="text-align:left"><div class="mono">AD</div></div>
+      <nav>Serviços<span>·</span>Sobre<span>·</span>Preços<span>·</span>Contacto</nav>
+    </div>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Beauty Studio · Coimbra</span>
+        <h1>Amanda<br>Domingues</h1>
+        <div class="script">Mais que beleza, é sobre você.</div>
+        <p class="lead">Manicure, maquilhagem, penteados e sobrancelhas em Coimbra — com tempo, carinho e atenção ao detalhe.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852"><svg><use href="#i-cal"/></svg>Agendar</a>
+          <a class="btn btn-ghost" href="https://wa.me/351932965698" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+        </div>
+        <div class="rating"><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b>5,0</b> · 282 atendimentos · 114 clientes</div>
+      </div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-nail"/></svg><span class="ph-cap">Unhas de gel</span><span class="ph-tag">referência</span></div>
+    </section>
+  </div>
+
+  <div class="band" style="background:var(--white)"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">O que fazemos</span><h2>Quatro cuidados, um só lugar.</h2></div>
+    <div class="svc">
+      <div class="svc-row"><span class="svc-no">01</span><div><h3>Manicure</h3><span class="b">Unhas que realçam a sua beleza</span></div><span class="pr">A partir de 12€</span></div>
+      <div class="svc-row"><span class="svc-no">02</span><div><h3>Maquilhagem</h3><span class="b">Beleza em cada detalhe</span></div><span class="pr">Sob consulta</span></div>
+      <div class="svc-row"><span class="svc-no">03</span><div><h3>Penteado</h3><span class="b">Estilo para todas as ocasiões</span></div><span class="pr">Sob consulta</span></div>
+      <div class="svc-row"><span class="svc-no">04</span><div><h3>Sobrancelhas</h3><span class="b">Harmonia para o seu olhar</span></div><span class="pr">Sob consulta</span></div>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Portfólio</span><h2>O trabalho fala por si.</h2></div>
+    <div class="gallery">
+      <div class="ph ph--nude"><svg class="ph-ic"><use href="#i-nail"/></svg><span class="ph-cap">Nail art</span></div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-makeup"/></svg><span class="ph-cap">Maquilhagem</span></div>
+      <div class="ph ph--brown"><svg class="ph-ic"><use href="#i-hair"/></svg><span class="ph-cap">Penteado</span></div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-brow"/></svg><span class="ph-cap">Sobrancelhas</span></div>
+      <div class="ph ph--nude"><svg class="ph-ic"><use href="#i-nail"/></svg><span class="ph-cap">Verniz de gel</span></div>
+    </div>
+  </div></div>
+
+  <div class="band" style="background:var(--nude-soft)"><div class="wrap">
+    <div class="about">
+      <div class="ph ph--brown order-ph"><svg class="ph-ic"><use href="#i-makeup"/></svg><span class="ph-cap">A Amanda</span><span class="ph-tag">referência</span></div>
+      <div>
+        <span class="eyebrow">Sobre a Amanda</span>
+        <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-top:.4rem">Cada cliente é única.</h2>
+        <div class="pq">“É sobre você — sempre.”</div>
+        <p class="lead">Mais do que unhas bonitas ou uma maquilhagem perfeita, o que fica é a sensação de ter sido bem cuidada. É assim que a Amanda trabalha: com calma, carinho e olho no detalhe, do início ao fim.</p>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="band" style="background:var(--white)"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Tabela de preços · unhas</span><h2>Transparente, como deve ser.</h2></div>
+    <div class="prices">
+      <div class="price-row"><span class="nm">Manicure simples</span><span class="dots"></span><span class="pr">12€<span class="du">1h</span></span></div>
+      <div class="price-row"><span class="nm">Verniz de gel</span><span class="dots"></span><span class="pr">desde 20€<span class="du">1h</span></span></div>
+      <div class="price-row"><span class="nm">Gel em unha natural</span><span class="dots"></span><span class="pr">23,50€<span class="du">1h30</span></span></div>
+      <div class="price-row"><span class="nm">Extensões de unhas</span><span class="dots"></span><span class="pr">desde 35€<span class="du">1h35</span></span></div>
+      <div class="price-row"><span class="nm">Pedicure simples</span><span class="dots"></span><span class="pr">21,50€<span class="du">1h</span></span></div>
+      <div class="price-row"><span class="nm">Pedicure de gel</span><span class="dots"></span><span class="pr">desde 25€<span class="du">1h15</span></span></div>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Quem já veio</span><h2>Avaliação 5,0 no Fresha.</h2></div>
+    <div class="quotes">
+      <div class="quote"><p>Super simpática e profissional. O trabalho ficou impecável.</p><span class="who">Cliente verificada · Fresha</span></div>
+      <div class="quote"><p>Superou as minhas expectativas. Volto de certeza.</p><span class="who">Cliente verificada · Fresha</span></div>
+      <div class="quote"><p>Atenção e carinho do início ao fim. Recomendo muito.</p><span class="who">Cliente verificada · Fresha</span></div>
+    </div>
+  </div></div>
+
+  <div class="band" style="background:var(--nude-soft)"><div class="wrap">
+    <div class="finale">
+      <div>
+        <span class="eyebrow"><svg style="width:1rem;height:1rem;vertical-align:-2px"><use href="#i-pin"/></svg> Onde estamos</span>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 .6rem">Rua João de Deus Ramos 146</h2>
+        <p class="lead">Fonte da Cheira, Coimbra · <span style="white-space:nowrap"><svg style="width:.9rem;height:.9rem;vertical-align:-1px;color:var(--gold-deep)"><use href="#i-clock"/></svg> atendimento por marcação</span></p>
+        <div class="hero-cta" style="margin-top:1.4rem">
+          <a class="btn btn-primary js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar agora</a>
+          <a class="btn btn-ghost" href="https://wa.me/351932965698" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <a class="ph ph--rose" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Jo%C3%A3o+de+Deus+Ramos+146+Coimbra" target="_blank" rel="noopener" style="text-decoration:none"><svg class="ph-ic"><use href="#i-pin"/></svg><span class="ph-cap">Ver no mapa</span></a>
+    </div>
+  </div></div>
+
+  <!-- footer A -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="col"><h4>Amanda Domingues</h4><span class="sub">Beauty Studio</span><p style="margin-top:.8rem;max-width:34ch">Mais que beleza, é sobre você. Manicure, maquilhagem, penteados e sobrancelhas em Coimbra.</p></div>
+      <div class="col"><span class="lbl">Contacto</span><p>Rua João de Deus Ramos 146</p><p>Fonte da Cheira, Coimbra</p><p style="user-select:all">+351 932 965 698</p></div>
+      <div class="col"><span class="lbl">Siga / agende</span><a href="https://instagram.com/amandadomingues.beauty" target="_blank" rel="noopener"><svg style="width:1rem;height:1rem;vertical-align:-2px"><use href="#i-ig"/></svg> @amandadomingues.beauty</a><a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar no Fresha</a><a href="https://wa.me/351932965698" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <div class="legal"><div class="wrap"><span>© 2026 Amanda Domingues Beauty Studio</span><span>Coimbra · Portugal</span></div></div>
+  </footer>
+</main>
+
+<!-- ================================================================= MODELO B -->
+<main id="model-b" class="model m-b" hidden>
+  <div class="wrap">
+    <div class="topnav">
+      <div class="logo"><div class="mono">AD</div><div class="nm">Amanda Domingues</div><div class="sub">Beauty Studio</div></div>
+      <a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agende o seu horário</a>
+    </div>
+    <section class="hero">
+      <div class="script">Mais que beleza,<br>é sobre você.</div>
+      <h1>Beleza, cuidado e autoestima num só lugar.</h1>
+      <p class="lead">A Amanda cuida das suas unhas, maquilhagem, penteado e sobrancelhas com o carinho e a atenção que você merece — em Coimbra.</p>
+      <div class="hero-cta">
+        <a class="btn btn-rose btn-round js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852"><svg><use href="#i-cal"/></svg>Agendar</a>
+        <a class="btn btn-ghost btn-round" href="https://wa.me/351932965698" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+      </div>
+      <div class="rating" style="justify-content:center"><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b>5,0</b> · 114 clientes felizes</div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-makeup"/></svg><span class="ph-cap">O estúdio</span><span class="ph-tag">referência</span></div>
+    </section>
+  </div>
+
+  <div class="band" style="padding-block:clamp(1rem,3vw,2rem)"><div class="wrap">
+    <div class="cards">
+      <div class="card"><span class="badge"><svg><use href="#i-nail"/></svg></span><h3>Manicure</h3><p>Unhas que realçam a sua beleza</p><span class="pr">A partir de 12€</span></div>
+      <div class="card"><span class="badge"><svg><use href="#i-makeup"/></svg></span><h3>Maquilhagem</h3><p>Beleza em cada detalhe</p><span class="pr">Sob consulta</span></div>
+      <div class="card"><span class="badge"><svg><use href="#i-hair"/></svg></span><h3>Penteado</h3><p>Estilo para todas as ocasiões</p><span class="pr">Sob consulta</span></div>
+      <div class="card"><span class="badge"><svg><use href="#i-brow"/></svg></span><h3>Sobrancelhas</h3><p>Harmonia para o seu olhar</p><span class="pr">Sob consulta</span></div>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap">
+    <div class="about">
+      <div class="ph ph--nude"><svg class="ph-ic"><use href="#i-makeup"/></svg><span class="ph-cap">A Amanda</span><span class="ph-tag">referência</span></div>
+      <div>
+        <span class="eyebrow">Olá, eu sou a Amanda</span>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 .8rem">Gosto de ver cada cliente sair a sorrir.</h2>
+        <p class="lead">Para mim, cada atendimento é um momento só seu — com tempo, conversa e muito carinho. O resultado aparece nas unhas, no olhar, no penteado; mas o que importa é como você se sente ao sair daqui.</p>
+        <div class="sig">com carinho, Amanda</div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="band" style="background:var(--rose-soft)"><div class="wrap">
+    <div class="sec-head" style="text-align:center;margin-inline:auto"><span class="eyebrow">Palavras de quem já veio</span><h2>Avaliação 5,0 ⭐ no Fresha</h2></div>
+    <div class="quotes">
+      <div class="quote"><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p>Super simpática e profissional. O trabalho ficou impecável.</p><span class="who">Cliente verificada · Fresha</span></div>
+      <div class="quote"><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p>Superou as minhas expectativas. Volto de certeza.</p><span class="who">Cliente verificada · Fresha</span></div>
+      <div class="quote"><span class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p>Atenção e carinho do início ao fim. Recomendo muito.</p><span class="who">Cliente verificada · Fresha</span></div>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap">
+    <div class="sec-head" style="text-align:center;margin-inline:auto"><span class="eyebrow">Momentos</span><h2>Um pouco do nosso trabalho</h2></div>
+    <div class="gallery">
+      <div class="ph ph--nude"><svg class="ph-ic"><use href="#i-nail"/></svg></div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-makeup"/></svg></div>
+      <div class="ph ph--brown"><svg class="ph-ic"><use href="#i-hair"/></svg></div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-brow"/></svg></div>
+    </div>
+  </div></div>
+
+  <div class="band"><div class="wrap">
+    <div class="finale">
+      <span class="eyebrow" style="color:var(--gold)">Vamos cuidar de si?</span>
+      <h2>O seu momento de beleza começa aqui.</h2>
+      <p class="lead">Rua João de Deus Ramos 146 · Fonte da Cheira, Coimbra · por marcação</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn btn-rose btn-round js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar agora</a>
+        <a class="btn btn-round" style="background:transparent;color:var(--nude-soft);border-color:var(--nude)" href="https://wa.me/351932965698" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+      </div>
+    </div>
+  </div></div>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="col"><h4>Amanda Domingues</h4><span class="sub">Beauty Studio</span><p style="margin-top:.8rem;max-width:34ch">Beleza, cuidado e autoestima num só lugar.</p></div>
+      <div class="col"><span class="lbl">Contacto</span><p>Rua João de Deus Ramos 146</p><p>Fonte da Cheira, Coimbra</p><p style="user-select:all">+351 932 965 698</p></div>
+      <div class="col"><span class="lbl">Siga / agende</span><a href="https://instagram.com/amandadomingues.beauty" target="_blank" rel="noopener"><svg style="width:1rem;height:1rem;vertical-align:-2px"><use href="#i-ig"/></svg> @amandadomingues.beauty</a><a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar no Fresha</a><a href="https://wa.me/351932965698" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <div class="legal"><div class="wrap"><span>© 2026 Amanda Domingues Beauty Studio</span><span>Coimbra · Portugal</span></div></div>
+  </footer>
+</main>
+
+<!-- ================================================================= MODELO C -->
+<main id="model-c" class="model m-c" hidden>
+  <div class="bookbar">
+    <div class="wrap">
+      <div class="logo"><span class="mono">AD</span><span class="nm">Amanda Domingues · Beauty Studio</span></div>
+      <div class="bookbar-cta">
+        <a class="btn btn-ghost" href="https://wa.me/351932965698" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+        <a class="btn btn-primary js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852"><svg><use href="#i-cal"/></svg>Agendar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Beleza em Coimbra</span>
+        <h1>Unhas, maquilhagem e penteados <em>em Coimbra</em></h1>
+        <p class="lead">Manicure, verniz de gel, maquilhagem, penteados e sobrancelhas — por marcação, em Fonte da Cheira. Avaliação 5,0 ⭐.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852"><svg><use href="#i-cal"/></svg>Agendar</a>
+          <a class="btn btn-ghost" href="https://wa.me/351932965698" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+        </div>
+      </div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-nail"/></svg><span class="ph-cap">Verniz de gel</span><span class="ph-tag">referência</span></div>
+    </section>
+    <div class="trust">
+      <div class="t"><b>5,0</b><span>Avaliação</span></div>
+      <div class="t"><b>282</b><span>Atendimentos</span></div>
+      <div class="t"><b>114</b><span>Clientes</span></div>
+      <div class="t"><b>12€</b><span>Desde</span></div>
+    </div>
+  </div>
+
+  <div class="band" style="padding-block:clamp(2rem,5vw,3.5rem)"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Serviços</span><h2>Escolha e agende em segundos.</h2></div>
+    <div class="grid">
+      <div class="scard"><svg class="svc-ic"><use href="#i-nail"/></svg><h3>Manicure</h3><p>Unhas que realçam a sua beleza</p><span class="pr">A partir de 12€</span><a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar →</a></div>
+      <div class="scard"><svg class="svc-ic"><use href="#i-makeup"/></svg><h3>Maquilhagem</h3><p>Beleza em cada detalhe</p><span class="pr">Sob consulta</span><a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar →</a></div>
+      <div class="scard"><svg class="svc-ic"><use href="#i-hair"/></svg><h3>Penteado</h3><p>Estilo para todas as ocasiões</p><span class="pr">Sob consulta</span><a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar →</a></div>
+      <div class="scard"><svg class="svc-ic"><use href="#i-brow"/></svg><h3>Sobrancelhas</h3><p>Harmonia para o seu olhar</p><span class="pr">Sob consulta</span><a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar →</a></div>
+    </div>
+  </div></div>
+
+  <div class="band" style="background:var(--cream);padding-block:clamp(2rem,5vw,3.5rem)"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Preços · unhas</span><h2>Sem surpresas.</h2></div>
+    <div class="ptable">
+      <div class="row"><span>Manicure simples <small style="color:var(--muted)">· 1h</small></span><span class="pr">12€</span></div>
+      <div class="row"><span>Verniz de gel <small style="color:var(--muted)">· 1h</small></span><span class="pr">desde 20€</span></div>
+      <div class="row"><span>Gel em unha natural <small style="color:var(--muted)">· 1h30</small></span><span class="pr">23,50€</span></div>
+      <div class="row"><span>Extensões de unhas <small style="color:var(--muted)">· 1h35</small></span><span class="pr">desde 35€</span></div>
+      <div class="row"><span>Pedicure simples <small style="color:var(--muted)">· 1h</small></span><span class="pr">21,50€</span></div>
+      <div class="row"><span>Pedicure de gel <small style="color:var(--muted)">· 1h15</small></span><span class="pr">desde 25€</span></div>
+    </div>
+  </div></div>
+
+  <div class="band" style="padding-block:clamp(2rem,5vw,3.5rem)"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Portfólio</span><h2>Trabalhos recentes</h2></div>
+    <div class="gallery">
+      <div class="ph ph--nude"><svg class="ph-ic"><use href="#i-nail"/></svg></div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-makeup"/></svg></div>
+      <div class="ph ph--brown"><svg class="ph-ic"><use href="#i-hair"/></svg></div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-brow"/></svg></div>
+      <div class="ph ph--nude"><svg class="ph-ic"><use href="#i-nail"/></svg></div>
+      <div class="ph ph--rose"><svg class="ph-ic"><use href="#i-makeup"/></svg></div>
+    </div>
+  </div></div>
+
+  <div class="band" style="background:var(--cream);padding-block:clamp(2rem,5vw,3.5rem)"><div class="wrap">
+    <div class="locrow">
+      <div>
+        <span class="eyebrow"><svg style="width:1rem;height:1rem;vertical-align:-2px"><use href="#i-pin"/></svg> Localização</span>
+        <h2 style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.4rem 0 .5rem">Rua João de Deus Ramos 146</h2>
+        <p class="lead">Fonte da Cheira, Coimbra<br><svg style="width:.9rem;height:.9rem;vertical-align:-1px;color:var(--gold-deep)"><use href="#i-clock"/></svg> Atendimento por marcação</p>
+      </div>
+      <a class="ph ph--nude" href="https://www.google.com/maps/search/?api=1&amp;query=Rua+Jo%C3%A3o+de+Deus+Ramos+146+Coimbra" target="_blank" rel="noopener" style="text-decoration:none"><svg class="ph-ic"><use href="#i-pin"/></svg><span class="ph-cap">Ver no mapa</span></a>
+    </div>
+  </div></div>
+
+  <div class="band" style="padding-block:clamp(2rem,5vw,3.5rem)"><div class="wrap">
+    <div class="finale">
+      <h2 style="font-size:clamp(1.8rem,4.5vw,2.8rem)">Pronta para o seu próximo agendamento?</h2>
+      <p class="lead">Escolha o horário no Fresha ou fale connosco pelo WhatsApp.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn btn-primary js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852"><svg><use href="#i-cal"/></svg>Agendar agora</a>
+        <a class="btn btn-ghost" href="https://wa.me/351932965698" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+      </div>
+    </div>
+  </div></div>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="col"><h4>Amanda Domingues</h4><span class="sub">Beauty Studio</span><p style="margin-top:.8rem;max-width:34ch">Unhas, maquilhagem, penteados e sobrancelhas em Coimbra.</p></div>
+      <div class="col"><span class="lbl">Contacto</span><p>Rua João de Deus Ramos 146</p><p>Fonte da Cheira, Coimbra</p><p style="user-select:all">+351 932 965 698</p></div>
+      <div class="col"><span class="lbl">Siga / agende</span><a href="https://instagram.com/amandadomingues.beauty" target="_blank" rel="noopener"><svg style="width:1rem;height:1rem;vertical-align:-2px"><use href="#i-ig"/></svg> @amandadomingues.beauty</a><a class="js-book" href="https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&amp;pId=3027852">Agendar no Fresha</a><a href="https://wa.me/351932965698" target="_blank" rel="noopener">WhatsApp</a></div>
+    </div>
+    <div class="legal"><div class="wrap"><span>© 2026 Amanda Domingues Beauty Studio</span><span>Coimbra · Portugal</span></div></div>
+  </footer>
+</main>
+
+<script>
+  var BOOK="https://www.fresha.com/pt/a/amandadominguesbeauty-coimbra-rua-joao-de-deus-ramos-146-d8kru9kb/booking?share=true&pId=3027852&employeeId=5455049&back=%2Fp%2Famanda-domingues-6492286";
+  document.querySelectorAll('.js-book').forEach(function(a){ a.href=BOOK; a.target="_blank"; a.rel="noopener"; });
+
+  var models=['a','b','c'];
+  var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function show(m){
+    if(models.indexOf(m)<0) m='a';
+    models.forEach(function(x){ document.getElementById('model-'+x).hidden = (x!==m); });
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.m===m ? 'true':'false'); });
+    try{ history.replaceState(null,'','#'+m); }catch(e){ location.hash=m; }
+    window.scrollTo(0,0);
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.m); }); });
+  var start=(location.hash||'').replace('#','');
+  show(models.indexOf(start)>=0 ? start : 'a');
+</script>

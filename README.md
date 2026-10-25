@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Amanda Domingues Beauty Studio — Landing Page
 
-## Getting Started
+Site institucional / landing page de conversão para o **Amanda Domingues Beauty Studio**
+(manicure, maquilhagem, penteados e sobrancelhas em Fonte da Cheira, Coimbra).
+Objetivo: ranquear em buscas locais em Coimbra e converter em agendamento (Fresha + WhatsApp).
 
-First, run the development server:
+## Stack
+- **Next.js 15** (App Router, TypeScript) + **React 19**
+- **Sanity.io** como CMS (Studio embutido em `/studio`)
+- CSS próprio com tokens da marca (sem framework) — design "Editorial" aprovado
+- Fontes **auto-hospedadas** (`next/font/local`): Cormorant Garamond, Jost, Petit Formal Script (RGPD-friendly)
+- SEO: Metadata API, JSON-LD `BeautySalon`, `sitemap.xml`, `robots.txt`
+- Deploy alvo: **Vercel**
 
+## Começar
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # já existe um .env.local de dev
+npm run dev                  # http://localhost:3000
 ```
+Sem Sanity configurado, o site usa o **conteúdo "semente"** em [`lib/content.seed.ts`](lib/content.seed.ts)
+(espelha o mockup). Basta editar esse ficheiro para mudar textos/preços enquanto o CMS não está ligado.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Rede com **Netskope**: o Node precisa confiar no CA. Neste ambiente já está resolvido via
+> `NODE_EXTRA_CA_CERTS` (global). Em Node 22+ também existe a flag `--use-system-ca`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Conteúdo (Sanity)
+1. Criar projeto em https://www.sanity.io (ou `npx sanity login` depois `npx sanity init --env .env.local`).
+2. Preencher em `.env.local`:
+   ```
+   NEXT_PUBLIC_SANITY_PROJECT_ID=xxxxxxxx
+   NEXT_PUBLIC_SANITY_DATASET=production
+   ```
+3. Abrir **`/studio`**, criar o documento **Definições do site** e os **Serviços / Depoimentos / Portfólio**.
+4. Com o `PROJECT_ID` definido, o site passa a ler do Sanity automaticamente (fallback para a semente em caso de erro).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Modelos de conteúdo em [`sanity/schemaTypes.ts`](sanity/schemaTypes.ts): `siteSettings`, `service`, `testimonial`, `galleryItem`.
 
-## Learn More
+## Imagens
+Hoje são **placeholders de referência**. As fotos reais (unhas, maquilhagem, penteado, sobrancelha, ambiente)
+entram pelo Sanity — cada `galleryItem`/`heroImage`/`about.image` aceita upload com texto alternativo.
+O `next/image` serve a partir de `cdn.sanity.io` (já configurado em `next.config.ts`).
 
-To learn more about Next.js, take a look at the following resources:
+## SEO
+- Metadata + Open Graph em [`app/layout.tsx`](app/layout.tsx) (idioma `pt-PT`, keywords locais de Coimbra).
+- JSON-LD `BeautySalon` em [`app/components/JsonLd.tsx`](app/components/JsonLd.tsx) (morada, geo, `aggregateRating`, serviços).
+- `sitemap.xml` e `robots.txt` via rotas em `app/`.
+- **Fora do código:** criar/reivindicar o **Google Business Profile** (maior alavanca do pacote local) e submeter o sitemap no Search Console.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy (Vercel)
+1. Importar o repositório na Vercel.
+2. Definir as variáveis de ambiente (`NEXT_PUBLIC_SANITY_*`, `NEXT_PUBLIC_SITE_URL`).
+3. Ligar o domínio (ex.: `amandadominguesbeauty.pt`).
+4. (Opcional) Webhook do Sanity → revalidação para updates instantâneos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
+| Comando | O quê |
+|---|---|
+| `npm run dev` | Dev server |
+| `npm run build` | Build de produção |
+| `npm start` | Servir o build |
+| `npm run lint` | ESLint |
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Referência de design
+Os mockups aprovados (incl. o seletor dos 3 modelos) estão em [`mockups/`](mockups/) — `editorial.html` é a direção escolhida.
