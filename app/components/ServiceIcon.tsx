@@ -20,17 +20,21 @@ const PATHS: Record<ServiceIconName, ReactNode> = {
   ),
   penteado: (
     <>
-      <circle cx="16" cy="17" r="6.6" />
-      <circle cx="16" cy="6.6" r="2.5" />
-      <path d="M13.7 8.6c1.4 1 3.2 1 4.6 0" />
+      <path d="M16 4C20.4 4 23 7.4 23 11.6 23 15.8 20.4 19.2 16 19.2 11.6 19.2 9 15.8 9 11.6 9 7.4 11.6 4 16 4Z" />
+      <path d="M14.6 19v5.2a1.4 1.4 0 0 0 2.8 0V19" />
+      <circle cx="12.8" cy="10" r=".75" fill="currentColor" stroke="none" />
+      <circle cx="16" cy="8.9" r=".75" fill="currentColor" stroke="none" />
+      <circle cx="19.2" cy="10" r=".75" fill="currentColor" stroke="none" />
+      <circle cx="14.4" cy="13" r=".75" fill="currentColor" stroke="none" />
+      <circle cx="17.6" cy="13" r=".75" fill="currentColor" stroke="none" />
     </>
   ),
   sobrancelhas: (
     <>
-      <path d="M6.5 12C11 8.5 21 8.5 25.5 12 21 10.2 11 10.2 6.5 12Z" />
-      <path d="M7 18.6C11 15.6 21 15.6 25 18.6 21 21.6 11 21.6 7 18.6Z" />
-      <circle cx="16" cy="18.6" r="2.1" />
-      <path d="M9 21.4 8.2 23.1M13 22.1 12.6 24M19 22.1 19.4 24M23 21.4 23.8 23.1" />
+      <path d="M6.5 11.2C11 8.2 21 8.2 25.5 11.2 21 9.4 11 9.4 6.5 11.2Z" />
+      <path d="M7 19C11 15.8 21 15.8 25 19 21 22.2 11 22.2 7 19Z" />
+      <circle cx="16" cy="18.9" r="2.1" />
+      <path d="M10 16 8.9 13.9M13.4 15.1 12.9 13M18.6 15.1 19.1 13M22 16 23.1 13.9" />
     </>
   ),
 };
