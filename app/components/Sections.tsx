@@ -344,7 +344,7 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
       <div className="wrap">
         <div className="top">
           <BrandLockup name={c.brand.name} studio={c.brand.studio} imageUrl={logoUrl} />
-          <p className="lead" style={{ color: "var(--nude)", maxWidth: "40ch" }}>
+          <p className="lead" style={{ color: "var(--muted)", maxWidth: "40ch" }}>
             {c.brand.tagline}
           </p>
         </div>
