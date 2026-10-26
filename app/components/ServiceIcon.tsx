@@ -44,11 +44,13 @@ export function ServiceIcon({
   size = 32,
   className,
   title,
+  strokeWidth = 1.4,
 }: {
   name: ServiceIconName;
   size?: number;
   className?: string;
   title?: string;
+  strokeWidth?: number;
 }) {
   return (
     <svg
@@ -58,7 +60,7 @@ export function ServiceIcon({
       viewBox="0 0 32 32"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.75}
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
       role={title ? "img" : undefined}
