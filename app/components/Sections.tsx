@@ -1,9 +1,17 @@
 import Link from "next/link";
-import type { PriceItem, SiteContent } from "@/lib/types";
+import type { PriceItem, SiteContent, IconName } from "@/lib/types";
 import { BrandLockup, Figure, Icon, Stars } from "./ui";
+import { ServiceIcon, type ServiceIconName } from "./ServiceIcon";
 
 type P = { c: SiteContent };
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+
+const SERVICE_ICON: Record<IconName, ServiceIconName> = {
+  nail: "manicure",
+  makeup: "maquiagem",
+  hair: "penteado",
+  brow: "sobrancelhas",
+};
 
 export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
   const book = c.contact.freshaBooking || c.contact.freshaProfile;
@@ -62,7 +70,7 @@ export function Services({ c }: P) {
           {c.services.map((s, i) => (
             <div className="svc-row" key={s.title}>
               <span className="svc-no">{String(i + 1).padStart(2, "0")}</span>
-              <Icon name={s.icon} className="svc-ic" />
+              <ServiceIcon name={SERVICE_ICON[s.icon] ?? "manicure"} className="svc-ic" />
               <div>
                 <h3>{s.title}</h3>
                 <span className="b">{s.benefit}</span>
