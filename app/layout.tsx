@@ -4,6 +4,8 @@ import { display, body, script } from "./fonts";
 import { getContent } from "@/lib/content";
 import { getLogoAssets } from "@/lib/assets";
 import { siteUrl } from "@/lib/env";
+import { SiteHeader } from "./components/SiteHeader";
+import { Footer } from "./components/Sections";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = await getContent();
@@ -49,10 +51,18 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const c = await getContent();
+  const logo = getLogoAssets();
+  const book = c.contact.freshaBooking || c.contact.freshaProfile;
   return (
-    <html lang="pt-PT" className={`${display.variable} ${body.variable} ${script.variable}`}>
-      <body>{children}</body>
+    <html lang="pt-PT" className={`${display.variable} ${body.variable} ${script.variable}`} suppressHydrationWarning>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <SiteHeader brandName={c.brand.name} studio={c.brand.studio} monogramUrl={logo.monogram} bookUrl={book} />
+        {children}
+        <Footer c={c} logoUrl={logo.lockup} />
+      </body>
     </html>
   );
 }

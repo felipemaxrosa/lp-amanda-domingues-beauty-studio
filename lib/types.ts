@@ -12,6 +12,7 @@ export interface PriceItem {
   name: string;
   price: string;
   duration: string;
+  group?: string;
 }
 
 export interface Testimonial {

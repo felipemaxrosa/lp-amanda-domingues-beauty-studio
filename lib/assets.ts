@@ -1,5 +1,6 @@
 import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import type { GalleryItem, SiteContent, Tone } from "./types";
 
 const has = (rel: string) => {
   try {
@@ -51,5 +52,30 @@ export function getPhotoAssets() {
     hero: toUrl(pick("photos/ambiente.jpg", "photos/ambiente.png", "photos/ambiente.webp")),
     about: toUrl(pick("photos/sobre.jpg", "photos/sobre.png", "photos/sobre.webp")),
     gallery: listDir("photos/galeria"),
+  };
+}
+
+/** Galeria final: Sanity (se tiver imagens) → fotos locais → placeholders do seed. */
+export function buildGallery(c: SiteContent): GalleryItem[] {
+  if (c.gallery.some((g) => g.imageUrl)) return c.gallery;
+  const photos = getPhotoAssets().gallery;
+  if (!photos.length) return c.gallery;
+  return photos.map((url, i) => ({
+    caption: "",
+    icon: c.gallery[i % c.gallery.length]?.icon ?? "nail",
+    tone: (i % 2 ? "nude" : "rose") as Tone,
+    imageUrl: url,
+    alt: "Trabalho de unhas — Amanda Domingues Beauty Studio",
+  }));
+}
+
+/** Conteúdo com fotos reais aplicadas (hero/sobre/galeria), com fallback. */
+export function buildContent(c: SiteContent): SiteContent {
+  const photos = getPhotoAssets();
+  return {
+    ...c,
+    heroImageUrl: c.heroImageUrl ?? photos.hero ?? undefined,
+    about: { ...c.about, imageUrl: c.about.imageUrl ?? photos.about ?? undefined },
+    gallery: buildGallery(c),
   };
 }

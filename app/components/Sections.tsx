@@ -1,42 +1,17 @@
-import type { SiteContent } from "@/lib/types";
+import Link from "next/link";
+import type { PriceItem, SiteContent } from "@/lib/types";
 import { BrandLockup, Figure, Icon, Stars } from "./ui";
 
 type P = { c: SiteContent };
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
-export function Hero({
-  c,
-  logoUrl,
-  monogramUrl,
-}: P & { logoUrl?: string | null; monogramUrl?: string | null }) {
+export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
   const book = c.contact.freshaBooking || c.contact.freshaProfile;
   return (
-    <header className="hero">
+    <section className="hero">
       <div className="wrap">
-        <div className="topnav">
-          <span className="hdr-brand" aria-label={`${c.brand.name} ${c.brand.studio}`}>
-            {monogramUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img className="hdr-mono" src={monogramUrl} alt="" />
-            ) : (
-              <span className="brand sm brand--onlight">
-                <span className="mono">AD</span>
-              </span>
-            )}
-            <span className="hdr-name">{c.brand.name}</span>
-          </span>
-          <nav aria-label="Navegação principal">
-            <a href="#servicos">Serviços</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#precos">Preços</a>
-            <a href="#contacto">Contacto</a>
-          </nav>
-        </div>
         <div className="hero-grid">
           <div>
-            <span className="eyebrow">
-              {c.brand.studio} · {c.contact.address.city}
-            </span>
             <h1 style={{ margin: 0 }}>
               <BrandLockup name={c.brand.name} studio={c.brand.studio} onLight imageUrl={logoUrl} />
             </h1>
@@ -66,15 +41,16 @@ export function Hero({
             tag={c.heroImageUrl ? undefined : "referência"}
             imageUrl={c.heroImageUrl}
             alt="Estúdio Amanda Domingues Beauty Studio, em Fonte da Cheira, Coimbra"
+            priority
+            sizes="(max-width: 860px) 100vw, 46vw"
           />
         </div>
       </div>
-    </header>
+    </section>
   );
 }
 
 export function Services({ c }: P) {
-  const book = c.contact.freshaBooking || c.contact.freshaProfile;
   return (
     <section id="servicos" className="band band--white">
       <div className="wrap">
@@ -91,38 +67,60 @@ export function Services({ c }: P) {
                 <h3>{s.title}</h3>
                 <span className="b">{s.benefit}</span>
               </div>
-              <a className="pr" href={book} {...ext} aria-label={`Agendar ${s.title}`} style={{ textDecoration: "none" }}>
-                {s.priceLabel}
-              </a>
+              <span className="pr">{s.priceLabel}</span>
             </div>
           ))}
+        </div>
+        <div className="section-cta">
+          <Link className="btn btn-ghost" href="/precos">
+            Ver tabela de preços
+          </Link>
         </div>
       </div>
     </section>
   );
 }
 
-export function Gallery({ c }: P) {
+export function Gallery({
+  items,
+  variant = "featured",
+  showCta = false,
+  eyebrow = "Portfólio",
+  heading = "O trabalho fala por si.",
+}: {
+  items: SiteContent["gallery"];
+  variant?: "featured" | "all";
+  showCta?: boolean;
+  eyebrow?: string;
+  heading?: string;
+}) {
   return (
-    <section className="band">
+    <section id="portfolio" className="band">
       <div className="wrap">
         <div className="sec-head">
-          <span className="eyebrow">Portfólio</span>
-          <h2>O trabalho fala por si.</h2>
+          <span className="eyebrow">{eyebrow}</span>
+          <h2>{heading}</h2>
         </div>
-        <div className="gallery">
-          {c.gallery.map((g, i) => (
+        <div className={`gallery gallery--${variant}`}>
+          {items.map((g, i) => (
             <Figure
               key={i}
               tone={g.tone}
               icon={g.icon}
-              caption={g.caption}
+              caption={g.imageUrl ? undefined : g.caption}
               imageUrl={g.imageUrl}
-              alt={g.alt}
-              sizes="(max-width: 520px) 50vw, 25vw"
+              alt={g.alt || "Trabalho de unhas — Amanda Domingues Beauty Studio"}
+              sizes={variant === "featured" ? "(max-width:520px) 50vw, 25vw" : "(max-width:520px) 50vw, 33vw"}
             />
           ))}
         </div>
+        {showCta && (
+          <div className="section-cta">
+            <Link className="btn btn-gold" href="/portfolio">
+              Ver portfólio completo
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -156,24 +154,47 @@ export function About({ c }: P) {
 }
 
 export function Prices({ c }: P) {
+  const groups: { name: string; items: PriceItem[] }[] = [];
+  for (const p of c.prices) {
+    const key = p.group || "Serviços";
+    let g = groups.find((x) => x.name === key);
+    if (!g) {
+      g = { name: key, items: [] };
+      groups.push(g);
+    }
+    g.items.push(p);
+  }
+  const book = c.contact.freshaBooking || c.contact.freshaProfile;
   return (
     <section id="precos" className="band band--white">
       <div className="wrap">
         <div className="sec-head">
-          <span className="eyebrow">Tabela de preços · unhas</span>
+          <span className="eyebrow">Tabela de preços</span>
           <h2>Transparente, como deve ser.</h2>
         </div>
-        <div className="prices">
-          {c.prices.map((p) => (
-            <div className="price-row" key={p.name}>
-              <span className="nm">{p.name}</span>
-              <span className="dots" />
-              <span className="pr">
-                {p.price}
-                <span className="du">{p.duration}</span>
-              </span>
+        <div className="price-groups">
+          {groups.map((g) => (
+            <div className="price-group" key={g.name}>
+              <h3 className="price-group__title">{g.name}</h3>
+              <div className="prices">
+                {g.items.map((p) => (
+                  <div className="price-row" key={p.name}>
+                    <span className="nm">{p.name}</span>
+                    <span className="pr">
+                      {p.price}
+                      {p.duration && <span className="du">{p.duration}</span>}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
+        </div>
+        <div className="section-cta">
+          <a className="btn btn-gold" href={book} {...ext}>
+            <Icon name="cal" />
+            Agendar no Fresha
+          </a>
         </div>
       </div>
     </section>
@@ -186,7 +207,9 @@ export function Testimonials({ c }: P) {
       <div className="wrap">
         <div className="sec-head">
           <span className="eyebrow">Quem já veio</span>
-          <h2>Avaliação {c.stats.rating} no Fresha.</h2>
+          <h2 className="rating-title">
+            <Stars /> Avaliação <span className="num">{c.stats.rating}</span> no Fresha
+          </h2>
         </div>
         <div className="quotes">
           {c.testimonials.map((t, i) => (
@@ -204,37 +227,101 @@ export function Testimonials({ c }: P) {
   );
 }
 
-export function Location({ c }: P) {
+export function CtaBand({ c }: P) {
   const book = c.contact.freshaBooking || c.contact.freshaProfile;
   const a = c.contact.address;
   return (
-    <section id="contacto" className="band band--nude">
+    <section className="band band--nude">
+      <div className="wrap cta-center">
+        <span className="eyebrow">Vamos cuidar de si?</span>
+        <h2>O seu momento de beleza começa aqui.</h2>
+        <p className="lead">
+          {a.line}, {a.city} · {c.contact.hours.toLowerCase()}
+        </p>
+        <div className="hero-cta cta-center__btns">
+          <a className="btn btn-gold" href={book} {...ext}>
+            <Icon name="cal" />
+            Agendar
+          </a>
+          <a className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
+            <Icon name="wa" />
+            WhatsApp
+          </a>
+        </div>
+        <Link className="cta-link" href="/contacto">
+          Ver localização e contacto →
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export function ContactSection({ c }: P) {
+  const a = c.contact.address;
+  const q = encodeURIComponent(`${a.line}, ${a.area}, ${a.city}, Portugal`);
+  const mapSrc = `https://www.google.com/maps?q=${q}&output=embed`;
+  const book = c.contact.freshaBooking || c.contact.freshaProfile;
+  return (
+    <section className="band">
       <div className="wrap">
-        <div className="finale">
-          <div>
-            <span className="eyebrow">
-              <Icon name="pin" className="inline-ic" /> Onde estamos
-            </span>
-            <h2 style={{ fontSize: "clamp(1.9rem,4vw,2.6rem)", margin: ".4rem 0 .6rem" }}>{a.line}</h2>
-            <p className="lead">
-              {a.area}, {a.city} ·{" "}
-              <span style={{ whiteSpace: "nowrap" }}>
-                <Icon name="clock" className="inline-ic" /> {c.contact.hours.toLowerCase()}
-              </span>
-            </p>
-            <div className="hero-cta" style={{ marginTop: "1.4rem" }}>
+        <div className="sec-head">
+          <span className="eyebrow">Contacto</span>
+          <h2>Onde estamos</h2>
+        </div>
+        <div className="contact-grid">
+          <div className="contact-info">
+            <div className="ci">
+              <Icon name="pin" className="inline-ic" />
+              <div>
+                <b>{a.line}</b>
+                <span>
+                  {a.area}, {a.city}
+                </span>
+              </div>
+            </div>
+            <div className="ci">
+              <Icon name="clock" className="inline-ic" />
+              <div>
+                <b>Horário</b>
+                <span>{c.contact.hours}</span>
+              </div>
+            </div>
+            <div className="ci">
+              <Icon name="wa" className="inline-ic" />
+              <div>
+                <b>Telefone / WhatsApp</b>
+                <span style={{ userSelect: "all" }}>{c.contact.phoneDisplay}</span>
+              </div>
+            </div>
+            <div className="ci">
+              <Icon name="ig" className="inline-ic" />
+              <div>
+                <b>Instagram</b>
+                <a href={c.contact.instagram} {...ext}>
+                  {c.contact.instagramHandle}
+                </a>
+              </div>
+            </div>
+            <div className="hero-cta" style={{ marginTop: "1.2rem" }}>
               <a className="btn btn-gold" href={book} {...ext}>
-                Agendar agora
+                <Icon name="cal" />
+                Agendar
               </a>
               <a className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
+                <Icon name="wa" />
                 WhatsApp
               </a>
             </div>
           </div>
-          <a className="fig fig--rose" href={c.contact.maps} {...ext} style={{ textDecoration: "none", aspectRatio: "16/11" }}>
-            <Icon name="pin" className="fig-ic" />
-            <span className="fig-cap">Ver no mapa</span>
-          </a>
+          <div className="contact-map">
+            <iframe
+              title={`Mapa — ${c.brand.name} ${c.brand.studio}`}
+              src={mapSrc}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -263,13 +350,16 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
             <p style={{ userSelect: "all" }}>{c.contact.phoneDisplay}</p>
           </div>
           <div className="col">
-            <span className="lbl">Siga</span>
+            <span className="lbl">Navegar</span>
+            <Link href="/portfolio">Portfólio</Link>
+            <Link href="/precos">Preços</Link>
+            <Link href="/contacto">Contacto</Link>
+          </div>
+          <div className="col">
+            <span className="lbl">Siga / agende</span>
             <a href={c.contact.instagram} {...ext}>
               <Icon name="ig" className="inline-ic" /> {c.contact.instagramHandle}
             </a>
-          </div>
-          <div className="col">
-            <span className="lbl">Agende</span>
             <a href={book} {...ext}>
               Agendar no Fresha
             </a>

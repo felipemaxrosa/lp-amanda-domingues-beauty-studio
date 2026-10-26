@@ -132,6 +132,7 @@ export function Figure({
   alt,
   className,
   sizes = "(max-width: 860px) 100vw, 50vw",
+  priority = false,
 }: {
   tone: Tone;
   icon: IconName;
@@ -141,12 +142,13 @@ export function Figure({
   alt?: string;
   className?: string;
   sizes?: string;
+  priority?: boolean;
 }) {
   const cls = ["fig", `fig--${tone}`, className].filter(Boolean).join(" ");
   return (
     <div className={cls}>
       {imageUrl ? (
-        <Image src={imageUrl} alt={alt || caption || ""} fill sizes={sizes} style={{ objectFit: "cover" }} />
+        <Image src={imageUrl} alt={alt || caption || ""} fill sizes={sizes} priority={priority} style={{ objectFit: "cover" }} />
       ) : (
         <>
           <Icon name={icon} className="fig-ic" />
