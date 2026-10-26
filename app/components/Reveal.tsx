@@ -10,10 +10,8 @@ export function Reveal({ children, className }: { children: React.ReactNode; cla
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
-      return;
-    }
+    // prefers-reduced-motion é tratado por CSS (globals.css força .reveal visível),
+    // por isso aqui só configuramos o observer — sem setState síncrono no efeito.
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {

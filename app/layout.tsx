@@ -56,7 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const logo = getLogoAssets();
   const book = c.contact.freshaBooking || c.contact.freshaProfile;
   return (
-    <html lang="pt-PT" className={`${display.variable} ${body.variable} ${script.variable}`} suppressHydrationWarning>
+    <html lang="pt-PT" data-scroll-behavior="smooth" className={`${display.variable} ${body.variable} ${script.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <SiteHeader brandName={c.brand.name} studio={c.brand.studio} monogramUrl={logo.monogram} bookUrl={book} />
