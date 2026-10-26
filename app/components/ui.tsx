@@ -175,7 +175,7 @@ export function Figure({
   return (
     <div className={cls}>
       {imageUrl ? (
-        <Image src={imageUrl} alt={alt || caption || ""} fill sizes={sizes} priority={priority} style={{ objectFit: "cover" }} />
+        <Image src={imageUrl} alt={alt || caption || ""} fill sizes={sizes} priority={priority} className="object-cover" />
       ) : (
         <>
           <Icon name={icon} className="fig-ic" />

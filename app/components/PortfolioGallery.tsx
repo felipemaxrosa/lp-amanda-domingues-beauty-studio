@@ -33,7 +33,7 @@ export function PortfolioGallery({ items }: { items: Item[] }) {
       <div className="gallery gallery--all">
         {items.map((it, i) => (
           <button key={i} type="button" className="fig fig--rose gallery-btn" onClick={() => setIdx(i)} aria-label={`Abrir imagem ${i + 1} de ${items.length}`}>
-            <Image src={it.url} alt={it.alt || ""} fill sizes="(max-width:520px) 50vw, 33vw" style={{ objectFit: "cover" }} />
+            <Image src={it.url} alt={it.alt || ""} fill sizes="(max-width:520px) 50vw, 33vw" className="object-cover" />
           </button>
         ))}
       </div>
@@ -55,7 +55,7 @@ export function PortfolioGallery({ items }: { items: Item[] }) {
             ‹
           </button>
           <figure className="lb-stage" onClick={(e) => e.stopPropagation()}>
-            <Image src={items[idx!].url} alt={items[idx!].alt || ""} fill sizes="92vw" style={{ objectFit: "contain" }} priority />
+            <Image src={items[idx!].url} alt={items[idx!].alt || ""} fill sizes="92vw" className="object-contain" priority />
             <figcaption className="lb-count">
               {idx! + 1} / {items.length}
             </figcaption>

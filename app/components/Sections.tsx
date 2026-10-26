@@ -20,7 +20,7 @@ export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
       <div className="wrap">
         <div className="hero-grid">
           <div>
-            <h1 style={{ margin: 0 }}>
+            <h1>
               <BrandLockup name={c.brand.name} studio={c.brand.studio} onLight imageUrl={logoUrl} />
             </h1>
             <p className="script">{c.brand.tagline}</p>
@@ -151,7 +151,7 @@ export function About({ c }: P) {
           />
           <div>
             <span className="eyebrow">{c.about.eyebrow}</span>
-            <h2 style={{ fontSize: "clamp(2rem,4vw,2.8rem)", marginTop: ".4rem" }}>{c.about.heading}</h2>
+            <h2 className="text-[clamp(2rem,4vw,2.8rem)] mt-[.4rem]">{c.about.heading}</h2>
             <p className="pq">“{c.about.pullquote}”</p>
             <p className="lead">{c.about.body}</p>
           </div>
@@ -221,9 +221,9 @@ export function Testimonials({ c }: P) {
         </div>
         <div className="quotes">
           {c.testimonials.map((t, i) => (
-            <figure className="quote" key={i} style={{ margin: 0 }}>
+            <figure className="quote m-0" key={i}>
               <Icon name="quote" className="qi" />
-              <blockquote style={{ margin: 0 }}>
+              <blockquote className="m-0">
                 <p>{t.quote}</p>
               </blockquote>
               <figcaption className="who">{t.author}</figcaption>
@@ -298,7 +298,7 @@ export function ContactSection({ c }: P) {
               <Icon name="wa" className="inline-ic" />
               <div>
                 <b>Telefone / WhatsApp</b>
-                <span style={{ userSelect: "all" }}>{c.contact.phoneDisplay}</span>
+                <span className="select-all">{c.contact.phoneDisplay}</span>
               </div>
             </div>
             <div className="ci">
@@ -310,7 +310,7 @@ export function ContactSection({ c }: P) {
                 </a>
               </div>
             </div>
-            <div className="hero-cta" style={{ marginTop: "1.2rem" }}>
+            <div className="hero-cta mt-[1.2rem]">
               <a className="btn btn-gold" href={book} {...ext}>
                 <Icon name="cal" />
                 Agendar
@@ -344,7 +344,7 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
       <div className="wrap">
         <div className="top">
           <BrandLockup name={c.brand.name} studio={c.brand.studio} imageUrl={logoUrl} />
-          <p className="lead" style={{ color: "var(--muted)", maxWidth: "40ch" }}>
+          <p className="lead max-w-[40ch]">
             {c.brand.tagline}
           </p>
         </div>
@@ -355,7 +355,7 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
             <p>
               {a.area}, {a.city}
             </p>
-            <p style={{ userSelect: "all" }}>{c.contact.phoneDisplay}</p>
+            <p className="select-all">{c.contact.phoneDisplay}</p>
           </div>
           <div className="col">
             <span className="lbl">Navegar</span>
