@@ -1,0 +1,11 @@
+FOTOS REAIS — largue aqui (drop-in; depois migramos para o Sanity e apagamos)
+===============================================================================
+
+- ambiente.jpg                → foto do HERO (ambiente do estúdio). Paisagem fica bem.
+- sobre.jpg                   → retrato na secção "Sobre a Amanda" (vertical fica melhor).
+- galeria/  (subpasta)        → fotos do PORTFÓLIO. Largue quantas quiser
+                                 (ex.: galeria/01.jpg, galeria/02.jpg ...). Aparecem por
+                                 ordem alfabética; a 1ª fica em destaque (maior).
+
+Formatos: .jpg, .png, .webp. Em DEV basta recarregar a página.
+Quando o Sanity estiver ligado e com as fotos, estas pastas locais podem ser apagadas.

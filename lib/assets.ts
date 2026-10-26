@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const has = (rel: string) => {
@@ -24,5 +24,32 @@ export function getLogoAssets() {
     lockup: toUrl(pick("logo/lockup.svg", "logo/lockup.png", "logo/lockup.webp")),
     dark: toUrl(pick("logo/lockup-dark.png", "logo/lockup-dark.webp", "logo/og.png")),
     monogram: toUrl(pick("logo/monogram.svg", "logo/monogram.png")),
+  };
+}
+
+const IMG_RE = /\.(jpe?g|png|webp|avif)$/i;
+function listDir(rel: string) {
+  try {
+    return readdirSync(join(process.cwd(), "public", rel))
+      .filter((f) => IMG_RE.test(f))
+      .sort()
+      .map((f) => `/${rel}/${f}`);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Fotos reais (drop-in). Largue os ficheiros em public/photos/:
+ *   - public/photos/ambiente.jpg            → foto do hero (ambiente do estúdio)
+ *   - public/photos/sobre.jpg               → retrato na secção "Sobre a Amanda"
+ *   - public/photos/galeria/<qualquer>.jpg  → portfólio (quantas quiser; ordem alfabética)
+ * Depois de migrar para o Sanity, pode apagar estas pastas.
+ */
+export function getPhotoAssets() {
+  return {
+    hero: toUrl(pick("photos/ambiente.jpg", "photos/ambiente.png", "photos/ambiente.webp")),
+    about: toUrl(pick("photos/sobre.jpg", "photos/sobre.png", "photos/sobre.webp")),
+    gallery: listDir("photos/galeria"),
   };
 }
