@@ -73,7 +73,7 @@ export const seedContent: SiteContent = {
     { caption: "Sobrancelhas", icon: "brow", tone: "rose" },
     { caption: "Verniz de gel", icon: "nail", tone: "nude" },
   ],
-  heroImageUrl: "/photos/ambiente.jpg",
+  // hero/sobre/galeria vêm do Sanity; sem foto local, o fallback usa o placeholder.
   seo: {
     title: "Amanda Domingues Beauty Studio — Manicure, Maquilhagem e Penteados em Coimbra",
     description:
