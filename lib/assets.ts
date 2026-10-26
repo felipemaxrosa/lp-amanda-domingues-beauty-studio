@@ -1,4 +1,4 @@
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import type { GalleryItem, SiteContent, Tone } from "./types";
 
@@ -10,7 +10,15 @@ const has = (rel: string) => {
   }
 };
 const pick = (...rels: string[]) => rels.find(has) ?? null;
-const toUrl = (rel: string | null) => (rel ? "/" + rel : null);
+// versão pelo mtime: troca de ficheiro (mesmo nome) invalida a cache do next/image
+const ver = (rel: string) => {
+  try {
+    return Math.round(statSync(join(process.cwd(), "public", rel)).mtimeMs);
+  } catch {
+    return 0;
+  }
+};
+const toUrl = (rel: string | null) => (rel ? `/${rel}?v=${ver(rel)}` : null);
 
 /**
  * Deteta os logótipos reais em public/logo/ (drop-in).
@@ -34,7 +42,10 @@ function listDir(rel: string) {
     return readdirSync(join(process.cwd(), "public", rel))
       .filter((f) => IMG_RE.test(f))
       .sort()
-      .map((f) => `/${rel}/${f}`);
+      .map((f) => {
+        const r = `${rel}/${f}`;
+        return `/${r}?v=${ver(r)}`;
+      });
   } catch {
     return [];
   }
