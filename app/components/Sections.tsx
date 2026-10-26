@@ -216,7 +216,10 @@ export function Testimonials({ c }: P) {
         <div className="sec-head">
           <span className="eyebrow">Quem já veio</span>
           <h2 className="rating-title">
-            <Stars /> Avaliação <span className="num">{c.stats.rating}</span> no Fresha
+            <Stars />
+            <span>
+              Avaliação <span className="num">{c.stats.rating}</span> no Fresha
+            </span>
           </h2>
         </div>
         <div className="quotes">
