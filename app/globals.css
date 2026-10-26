@@ -219,8 +219,8 @@ p{margin:0}
 .site-header__inner{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.7rem;}
 .hdr-brand{display:inline-flex; align-items:center; gap:.7rem; text-decoration:none;}
 .site-nav{display:flex; align-items:center; gap:1.5rem;}
-.site-nav a{font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); text-decoration:none;}
-.site-nav a:hover{color:var(--gold-ink);}
+.site-nav a:not(.btn){font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); text-decoration:none;}
+.site-nav a:not(.btn):hover{color:var(--gold-ink);}
 .site-nav__cta{padding:.6rem 1.1rem; font-size:.72rem;}
 .site-burger{display:none; flex-direction:column; gap:5px; background:none; border:0; padding:.45rem; cursor:pointer;}
 .site-burger span{display:block; width:24px; height:2px; background:var(--brown); border-radius:2px;}
