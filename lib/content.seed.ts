@@ -49,19 +49,19 @@ export const seedContent: SiteContent = {
     {
       title: 'Maquilhagem',
       benefit: 'Beleza em cada detalhe',
-      priceLabel: 'Sob consulta',
+      priceLabel: 'A partir de 35€',
       icon: 'makeup',
     },
     {
       title: 'Penteado',
       benefit: 'Estilo para todas as ocasiões',
-      priceLabel: 'Sob consulta',
+      priceLabel: 'A partir de 35€',
       icon: 'hair',
     },
     {
       title: 'Sobrancelhas',
       benefit: 'Harmonia para o seu olhar',
-      priceLabel: 'Sob consulta',
+      priceLabel: 'A partir de 13,50€',
       icon: 'brow',
     },
   ],
