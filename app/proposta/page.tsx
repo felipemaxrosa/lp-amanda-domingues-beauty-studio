@@ -189,8 +189,41 @@ export default async function Proposta() {
         </div>
       </section>
 
-      {/* ---------- Fecho ---------- */}
+      {/* ---------- Próximos passos ---------- */}
       <section className="band band--white">
+        <div className="wrap">
+          <div className="sec-head">
+            <span className="eyebrow">Depois do sim</span>
+            <h2>Dois passos para ir ainda mais longe.</h2>
+            <p className="lead">Assim que avançarmos, trato também disto consigo:</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <article className="rounded-2xl border border-[var(--line)] bg-white p-7">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-[1.25rem] font-medium">Domínio próprio</h3>
+                <span className="flex-none rounded-full bg-[var(--nude-soft)] px-3 py-1 text-[.68rem] font-semibold uppercase tracking-[.12em] text-[var(--gold-ink)]">≈ 20€/ano</span>
+              </div>
+              <p className="lead mt-3 text-[.98rem]">
+                Em vez de um endereço genérico, algo como <strong>amandadominguesbeauty.pt</strong> — mais profissional,
+                mais confiança e melhor para o Google. O domínio é um custo anual à parte dos planos; eu faço a ligação.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-[var(--line)] bg-white p-7">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-[1.25rem] font-medium">Google Business Profile</h3>
+                <span className="flex-none rounded-full bg-[var(--nude-soft)] px-3 py-1 text-[.68rem] font-semibold uppercase tracking-[.12em] text-[var(--gold-ink)]">Grátis</span>
+              </div>
+              <p className="lead mt-3 text-[.98rem]">
+                O registo que faz a Amanda aparecer no <strong>Google e no Maps</strong> quando procuram “manicure” ou
+                “unhas em Coimbra” — a maior alavanca para novos clientes locais. Trato do registo e da otimização.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- Fecho ---------- */}
+      <section className="band band--nude">
         <div className="wrap cta-center">
           <p className="script text-[clamp(1.8rem,4vw,2.6rem)]">Vale o investimento?</p>
           <h2 className="max-w-[22ch]">Já está a usá-lo. Agora é só torná-lo oficialmente seu.</h2>
