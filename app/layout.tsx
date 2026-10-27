@@ -6,6 +6,7 @@ import { getLogoAssets } from "@/lib/assets";
 import { siteUrl } from "@/lib/env";
 import { SiteHeader } from "./components/SiteHeader";
 import { Footer } from "./components/Sections";
+import { ChromeSlot } from "./components/SiteChrome";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = await getContent();
@@ -59,9 +60,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="pt-PT" data-scroll-behavior="smooth" className={`${display.variable} ${body.variable} ${script.variable}`} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-        <SiteHeader brandName={c.brand.name} studio={c.brand.studio} monogramUrl={logo.monogram} bookUrl={book} />
+        <ChromeSlot>
+          <SiteHeader brandName={c.brand.name} studio={c.brand.studio} monogramUrl={logo.monogram} bookUrl={book} />
+        </ChromeSlot>
         {children}
-        <Footer c={c} logoUrl={logo.lockup} />
+        <ChromeSlot>
+          <Footer c={c} logoUrl={logo.lockup} />
+        </ChromeSlot>
       </body>
     </html>
   );
