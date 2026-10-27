@@ -50,5 +50,7 @@ export interface SiteContent {
   testimonials: Testimonial[];
   gallery: GalleryItem[];
   heroImageUrl?: string;
+  /** Imagem da página de formações (Sanity). */
+  formacaoImageUrl?: string;
   seo: { title: string; description: string };
 }

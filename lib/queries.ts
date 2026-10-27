@@ -5,6 +5,7 @@ export const SITE_QUERY = groq`{
     brand, contact, stats,
     about{ eyebrow, heading, pullquote, body, "imageUrl": image.asset->url, "alt": image.alt },
     "heroImageUrl": heroImage.asset->url,
+    "formacaoImageUrl": formacaoImage.asset->url,
     seo
   },
   "services": *[_type == "service"] | order(order asc){ title, benefit, priceLabel, icon },

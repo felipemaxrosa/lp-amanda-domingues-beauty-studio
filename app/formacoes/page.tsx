@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getContent } from "@/lib/content";
 import { Check, Icon } from "../components/ui";
 
@@ -40,8 +41,22 @@ export default async function Formacoes() {
   return (
     <>
       {/* ---------- Hero ---------- */}
-      <section className="hero">
-        <div className="wrap py-[clamp(3.5rem,8vw,6.5rem)] text-center">
+      <section className="hero relative isolate overflow-hidden">
+        {c.formacaoImageUrl && (
+          <>
+            <Image
+              src={c.formacaoImageUrl}
+              alt=""
+              aria-hidden
+              fill
+              sizes="100vw"
+              priority
+              className="pointer-events-none object-cover opacity-40"
+            />
+            <div aria-hidden className="absolute inset-0 bg-[rgba(251,247,244,.25)]" />
+          </>
+        )}
+        <div className="wrap relative z-10 py-[clamp(3.5rem,8vw,6.5rem)] text-center">
           <span className="eyebrow">Formação</span>
           <h1 className="mx-auto mt-4 max-w-[14ch] text-[clamp(2.6rem,7vw,4.6rem)] font-medium leading-[1.03]">
             Molde F1 + Verniz Gel

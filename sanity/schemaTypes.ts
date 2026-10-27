@@ -94,6 +94,7 @@ const siteSettings = defineType({
       ],
     }),
     imageWithAlt("heroImage", "Imagem do hero"),
+    imageWithAlt("formacaoImage", "Imagem da formação (página /formacoes)"),
     defineField({
       name: "seo",
       title: "SEO",

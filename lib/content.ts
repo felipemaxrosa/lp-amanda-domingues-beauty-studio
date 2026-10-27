@@ -19,6 +19,7 @@ function merge(seed: SiteContent, raw: Raw): SiteContent {
     stats: { ...seed.stats, ...(s.stats ?? {}) },
     about: { ...seed.about, ...(s.about ?? {}) },
     heroImageUrl: s.heroImageUrl ?? seed.heroImageUrl,
+    formacaoImageUrl: s.formacaoImageUrl ?? seed.formacaoImageUrl,
     seo: { ...seed.seo, ...(s.seo ?? {}) },
     services: raw.services?.length ? raw.services : seed.services,
     prices: seed.prices, // preços geridos aqui (ou mover para Sanity depois)
