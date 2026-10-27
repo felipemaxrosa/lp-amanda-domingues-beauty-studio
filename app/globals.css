@@ -116,9 +116,9 @@
 
   /* logótipo no header: monograma real + wordmark */
   .hdr-brand { display: inline-flex; align-items: center; gap: .75rem; }
-  .hdr-mono { height: 48px; width: auto; display: block; }
+  .hdr-mono { height: 40px; width: auto; display: block; }
   .hdr-name { font-family: var(--f-display); font-size: 1.05rem; letter-spacing: .24em; text-transform: uppercase; color: var(--brown); white-space: nowrap; }
-  @media (max-width: 520px) { .hdr-name { display: none; } .hdr-mono { height: 42px; } }
+  @media (max-width: 520px) { .hdr-name { display: none; } .hdr-mono { height: 36px; } }
 
   .brand.sm { flex-direction: row; align-items: center; gap: .6rem; }
   .brand.sm .mono { font-size: 1.6rem; margin: 0; }
