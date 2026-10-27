@@ -180,9 +180,8 @@ export const seedContent: SiteContent = {
   ],
   // hero/sobre/galeria vêm do Sanity; sem foto local, o fallback usa o placeholder.
   seo: {
-    title:
-      'Amanda Domingues Beauty Studio — Manicure, Maquilhagem e Penteados em Coimbra',
+    title: 'Amanda Domingues Beauty Studio — Unhas e Beleza em Coimbra',
     description:
-      'Studio de beleza em Fonte da Cheira, Coimbra. Manicure e unhas de gel, maquilhagem, penteados e sobrancelhas, com atenção ao detalhe. Avaliação 5,0 ★. Agende já.',
+      'Manicure, unhas de gel, maquilhagem, penteados e sobrancelhas em Fonte da Cheira, Coimbra. Atenção ao detalhe, avaliação 5,0★. Agende já.',
   },
 };

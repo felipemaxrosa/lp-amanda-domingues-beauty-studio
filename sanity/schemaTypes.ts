@@ -98,8 +98,19 @@ const siteSettings = defineType({
       title: "SEO",
       type: "object",
       fields: [
-        defineField({ name: "title", title: "Título (meta)", type: "string", validation: (r) => r.max(65) }),
-        defineField({ name: "description", title: "Descrição (meta)", type: "text", rows: 3, validation: (r) => r.max(160) }),
+        defineField({
+          name: "title",
+          title: "Título (meta)",
+          type: "string",
+          validation: (r) => r.max(65).warning("Recomendado até ~65 caracteres — o Google pode cortar títulos mais longos."),
+        }),
+        defineField({
+          name: "description",
+          title: "Descrição (meta)",
+          type: "text",
+          rows: 3,
+          validation: (r) => r.max(160).warning("Recomendado até ~160 caracteres — acima disto o Google costuma cortar."),
+        }),
       ],
     }),
   ],
