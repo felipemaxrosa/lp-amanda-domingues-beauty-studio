@@ -108,6 +108,20 @@ export function Stars() {
   );
 }
 
+/** Marca de verificação dourada (listas de "inclui"/benefícios). */
+export function Check() {
+  return (
+    <span
+      aria-hidden="true"
+      className="mt-[.15rem] grid h-[1.3rem] w-[1.3rem] flex-none place-items-center rounded-full bg-[var(--nude-soft)] text-[var(--gold-ink)]"
+    >
+      <svg viewBox="0 0 24 24" className="h-[.8rem] w-[.8rem]" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12.5 10 17 19 7" />
+      </svg>
+    </span>
+  );
+}
+
 function initials(name: string) {
   return name
     .split(/\s+/)

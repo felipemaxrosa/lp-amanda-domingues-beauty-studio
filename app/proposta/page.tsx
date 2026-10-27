@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getContent } from "@/lib/content";
-import { Icon } from "../components/ui";
+import { Check, Icon } from "../components/ui";
 
 // RASCUNHO para reagir — proposta comercial para a Amanda. Página privada (noindex).
 export const metadata: Metadata = {
@@ -10,19 +10,6 @@ export const metadata: Metadata = {
 };
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
-
-function Check() {
-  return (
-    <span
-      aria-hidden="true"
-      className="mt-[.15rem] grid h-[1.3rem] w-[1.3rem] flex-none place-items-center rounded-full bg-[var(--nude-soft)] text-[var(--gold-ink)]"
-    >
-      <svg viewBox="0 0 24 24" className="h-[.8rem] w-[.8rem]" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M5 12.5 10 17 19 7" />
-      </svg>
-    </span>
-  );
-}
 
 export default async function Proposta() {
   const c = await getContent();

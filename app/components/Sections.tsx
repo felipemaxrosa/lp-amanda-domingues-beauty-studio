@@ -366,6 +366,7 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
             <span className="lbl">Navegar</span>
             <Link href="/portfolio">Portfólio</Link>
             <Link href="/precos">Preços</Link>
+            <Link href="/formacoes">Formações</Link>
             <Link href="/contacto">Contacto</Link>
           </div>
           <div className="col">
