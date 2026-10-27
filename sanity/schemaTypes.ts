@@ -49,6 +49,7 @@ const siteSettings = defineType({
           type: "object",
           fields: [
             defineField({ name: "line", title: "Rua e número", type: "string" }),
+            defineField({ name: "venue", title: "Edifício / Sala", type: "string" }),
             defineField({ name: "area", title: "Zona/Bairro", type: "string" }),
             defineField({ name: "city", title: "Cidade", type: "string" }),
             defineField({ name: "region", title: "Distrito", type: "string" }),

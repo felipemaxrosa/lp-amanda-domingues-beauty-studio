@@ -22,6 +22,7 @@ export const seedContent: SiteContent = {
     instagramHandle: '@amandadomingues.beauty',
     address: {
       line: 'Rua João de Deus Ramos 146',
+      venue: 'Galeria Gira Solum, Piso 1, Sala 127',
       area: 'Fonte da Cheira',
       city: 'Coimbra',
       region: 'Coimbra',
@@ -109,6 +110,18 @@ export const seedContent: SiteContent = {
       duration: '2h',
     },
     {
+      group: 'Alongamentos & Manutenções',
+      name: 'Correção de unha',
+      price: 'desde 2€',
+      duration: '30min',
+    },
+    {
+      group: 'Alongamentos & Manutenções',
+      name: 'Remoção gel com brocas',
+      price: '5€',
+      duration: '30min',
+    },
+    {
       group: 'Pedicure',
       name: 'Pedicure comum',
       price: '21,50€',
@@ -134,21 +147,21 @@ export const seedContent: SiteContent = {
     },
     {
       group: 'Maquilhagem · Nail Art · Sobrancelha',
-      name: 'Maquilhagem',
-      price: 'Sob consulta',
-      duration: '',
+      name: 'Maquilhagem social',
+      price: 'desde 35€',
+      duration: '1h20',
     },
     {
       group: 'Maquilhagem · Nail Art · Sobrancelha',
-      name: 'Nail art',
-      price: 'Sob consulta',
-      duration: '',
+      name: 'Francesa e Nail art',
+      price: '2€',
+      duration: '10min',
     },
     {
       group: 'Maquilhagem · Nail Art · Sobrancelha',
-      name: 'Sobrancelhas',
-      price: 'Sob consulta',
-      duration: '',
+      name: 'Sobrancelha linha',
+      price: '13,50€',
+      duration: '35min',
     },
   ],
   about: {

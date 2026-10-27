@@ -285,6 +285,7 @@ export function ContactSection({ c }: P) {
               <Icon name="pin" className="inline-ic" />
               <div>
                 <b>{a.line}</b>
+                {a.venue && <span>{a.venue}</span>}
                 <span>
                   {a.area}, {a.city}
                 </span>
@@ -355,6 +356,7 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
           <div className="col">
             <span className="lbl">Contacto</span>
             <p>{a.line}</p>
+            {a.venue && <p>{a.venue}</p>}
             <p>
               {a.area}, {a.city}
             </p>

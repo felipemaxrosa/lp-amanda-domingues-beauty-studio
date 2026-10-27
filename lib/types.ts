@@ -38,7 +38,7 @@ export interface SiteContent {
     freshaProfile: string;
     instagram: string;
     instagramHandle: string;
-    address: { line: string; area: string; city: string; region: string; country: string; postalCode?: string };
+    address: { line: string; venue?: string; area: string; city: string; region: string; country: string; postalCode?: string };
     geo?: { lat: number; lng: number };
     hours: string;
     maps: string;
