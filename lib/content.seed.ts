@@ -33,7 +33,12 @@ export const seedContent: SiteContent = {
     hours: 'Atendimento por marcação',
     maps: 'https://www.google.com/maps/search/?api=1&query=Rua+Jo%C3%A3o+de+Deus+Ramos+146+Coimbra',
   },
-  stats: { rating: '5,0', appointments: '282', clients: '114', reviews: '8' },
+  stats: {
+    rating: '5,0',
+    appointments: 'Mais de 300',
+    clients: 'Mais de 100',
+    reviews: '8',
+  },
   services: [
     {
       title: 'Manicure',
@@ -134,13 +139,13 @@ export const seedContent: SiteContent = {
       duration: '1h15',
     },
     {
-      group: 'Cabelo & penteado',
+      group: 'Cabelo & Penteado',
       name: 'Penteado — cabelo médio',
       price: 'desde 35€',
       duration: '1h30',
     },
     {
-      group: 'Cabelo & penteado',
+      group: 'Cabelo & Penteado',
       name: 'Penteado — cabelo longo',
       price: 'desde 55€',
       duration: '1h40',
