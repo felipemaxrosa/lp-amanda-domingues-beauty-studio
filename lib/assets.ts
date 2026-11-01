@@ -19,6 +19,10 @@ const ver = (rel: string) => {
   }
 };
 const toUrl = (rel: string | null) => (rel ? `/${rel}?v=${ver(rel)}` : null);
+// Sem versão (?v=): o next/image rejeita query strings locais não listadas em images.localPatterns
+// (proteção contra enumeração). Usar para tudo o que é otimizado pelo next/image (logo/fotos).
+// A versão numa troca de ficheiro é tratada pelo redeploy (cache do otimizador é por deployment).
+const toPath = (rel: string | null) => (rel ? `/${rel}` : null);
 
 /**
  * Deteta os logótipos reais em public/logo/ (drop-in).
@@ -30,9 +34,9 @@ const toUrl = (rel: string | null) => (rel ? `/${rel}?v=${ver(rel)}` : null);
  */
 export function getLogoAssets() {
   return {
-    lockup: toUrl(pick("logo/lockup.svg", "logo/lockup.png", "logo/lockup.webp")),
+    lockup: toPath(pick("logo/lockup.svg", "logo/lockup.png", "logo/lockup.webp")),
     dark: toUrl(pick("logo/lockup-dark.png", "logo/lockup-dark.webp", "logo/og.png")),
-    monogram: toUrl(pick("logo/monogram.svg", "logo/monogram.png")),
+    monogram: toPath(pick("logo/monogram.svg", "logo/monogram.png")),
   };
 }
 
@@ -42,10 +46,7 @@ function listDir(rel: string) {
     return readdirSync(join(process.cwd(), "public", rel))
       .filter((f) => IMG_RE.test(f))
       .sort()
-      .map((f) => {
-        const r = `${rel}/${f}`;
-        return `/${r}?v=${ver(r)}`;
-      });
+      .map((f) => `/${rel}/${f}`);
   } catch {
     return [];
   }
@@ -60,8 +61,8 @@ function listDir(rel: string) {
  */
 export function getPhotoAssets() {
   return {
-    hero: toUrl(pick("photos/ambiente.jpg", "photos/ambiente.png", "photos/ambiente.webp")),
-    about: toUrl(pick("photos/sobre.jpg", "photos/sobre.png", "photos/sobre.webp")),
+    hero: toPath(pick("photos/ambiente.jpg", "photos/ambiente.png", "photos/ambiente.webp")),
+    about: toPath(pick("photos/sobre.jpg", "photos/sobre.png", "photos/sobre.webp")),
     gallery: listDir("photos/galeria"),
   };
 }

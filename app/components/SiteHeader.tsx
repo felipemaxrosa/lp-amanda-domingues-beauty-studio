@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "./ui";
 
 const LINKS = [
@@ -30,8 +31,7 @@ export function SiteHeader({
       <div className="wrap site-header__inner">
         <Link href="/" className="hdr-brand" aria-label={`${brandName} ${studio}`}>
           {monogramUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img className="hdr-mono" src={monogramUrl} alt="" />
+            <Image className="hdr-mono" src={monogramUrl} alt="" width={52} height={40} priority />
           ) : (
             <span className="brand sm brand--onlight">
               <span className="mono">AD</span>

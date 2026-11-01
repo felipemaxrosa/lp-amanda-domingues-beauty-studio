@@ -21,7 +21,7 @@ export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
         <div className="hero-grid">
           <div>
             <h1>
-              <BrandLockup name={c.brand.name} studio={c.brand.studio} onLight imageUrl={logoUrl} />
+              <BrandLockup name={c.brand.name} studio={c.brand.studio} onLight imageUrl={logoUrl} priority sizes="(max-width: 860px) 78vw, 440px" />
             </h1>
             <p className="script">{c.brand.tagline}</p>
             <p className="lead">
@@ -347,7 +347,7 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
     <footer className="foot">
       <div className="wrap">
         <div className="top">
-          <BrandLockup name={c.brand.name} studio={c.brand.studio} imageUrl={logoUrl} />
+          <BrandLockup name={c.brand.name} studio={c.brand.studio} imageUrl={logoUrl} sizes="(max-width: 860px) 70vw, 280px" />
           <p className="lead max-w-[40ch]">
             {c.brand.tagline}
           </p>

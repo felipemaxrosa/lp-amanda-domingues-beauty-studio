@@ -136,17 +136,30 @@ export function BrandLockup({
   small,
   onLight,
   imageUrl,
+  priority,
+  sizes = "(max-width: 860px) 80vw, 440px",
 }: {
   name: string;
   studio: string;
   small?: boolean;
   onLight?: boolean;
   imageUrl?: string | null;
+  priority?: boolean;
+  sizes?: string;
 }) {
   if (imageUrl) {
     const imgCls = ["brand-img", small ? "brand-img--sm" : ""].filter(Boolean).join(" ");
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={imageUrl} alt={`${name} ${studio}`} className={imgCls} />;
+    return (
+      <Image
+        src={imageUrl}
+        alt={`${name} ${studio}`}
+        className={imgCls}
+        width={1536}
+        height={1024}
+        sizes={sizes}
+        priority={priority}
+      />
+    );
   }
   const cls = ["brand", small ? "sm" : "", onLight ? "brand--onlight" : ""].filter(Boolean).join(" ");
   return (
