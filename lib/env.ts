@@ -11,5 +11,18 @@ export const apiVersion = (process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-1
 /** true quando há um projeto Sanity configurado. */
 export const hasSanity = projectId.length > 0;
 
-/** URL pública do site (para metadata/SEO). */
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://amandadominguesbeauty.pt").replace(/\/$/, "");
+/** Domínio final e canónico do site (metadata/SEO/sitemap/robots). */
+export const CANONICAL_URL = "https://amandadominguesbeauty.pt";
+
+/**
+ * URL pública do site. Em produção é SEMPRE o domínio canónico — assim nenhuma
+ * variável de ambiente desatualizada na Vercel (ex.: um URL *.vercel.app) pode
+ * estragar o sitemap/canonical/OG. Fora de produção respeita
+ * NEXT_PUBLIC_SITE_URL (ex.: http://localhost:3000 em dev). Só é usado no
+ * servidor (sitemap, robots, layout, JsonLd), por isso pode ler VERCEL_ENV.
+ */
+export const siteUrl = (
+  process.env.VERCEL_ENV === "production"
+    ? CANONICAL_URL
+    : process.env.NEXT_PUBLIC_SITE_URL || CANONICAL_URL
+).replace(/\/$/, "");
