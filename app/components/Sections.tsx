@@ -393,6 +393,16 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
               {c.contact.address.city} · {c.contact.address.country}
             </span>
           </div>
+          <p className="mt-3 text-center">
+            Desenvolvido por{" "}
+            <a
+              href="https://maxdigitalstudio.com.br/"
+              {...ext}
+              className="font-medium !text-[length:0.75rem] !text-[color:var(--gold-ink)] hover:underline"
+            >
+              Max Digital Studio
+            </a>
+          </p>
         </div>
       </div>
     </footer>
