@@ -59,9 +59,8 @@ node --env-file=.env.local scripts/set-hero.mjs caminho/foto.jpg  # troca a imag
 | `/precos` | Tabela de preços agrupada |
 | `/contacto` | Contactos + mapa Google |
 | `/studio` | Sanity Studio (embutido) |
-| `/proposta` | Proposta comercial — **privada** (`noindex`), sem header/rodapé |
 
-Header e rodapé são ocultados em rotas "nuas" por [`app/components/SiteChrome.tsx`](app/components/SiteChrome.tsx).
+[`app/components/SiteChrome.tsx`](app/components/SiteChrome.tsx) permite ocultar o header/rodapé em rotas "nuas" (atualmente nenhuma).
 
 ## SEO
 - Metadata + Open Graph em [`app/layout.tsx`](app/layout.tsx) (idioma `pt-PT`, keywords locais de Coimbra).

@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 
-/** Rotas "nuas" (sem header/rodapé do site), ex.: a página de proposta. */
-const BARE_ROUTES = ["/proposta"];
+/** Rotas "nuas" (sem header/rodapé do site). Vazio = todas as rotas têm chrome. */
+const BARE_ROUTES: string[] = [];
 
 /** Esconde o que envolve (header ou rodapé) nas rotas nuas. */
 export function ChromeSlot({ children }: { children: React.ReactNode }) {
