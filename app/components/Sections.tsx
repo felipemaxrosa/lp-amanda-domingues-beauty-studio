@@ -390,7 +390,10 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
               © {new Date().getFullYear()} {c.brand.name} {c.brand.studio}
             </span>
             <span>
-              {c.contact.address.city} · {c.contact.address.country}
+              {c.contact.address.city} · {c.contact.address.country} ·{" "}
+              <Link href="/privacidade" className="!text-[length:0.75rem] !text-[color:inherit] hover:underline">
+                Privacidade
+              </Link>
             </span>
           </div>
           <p className="mt-3 text-center">

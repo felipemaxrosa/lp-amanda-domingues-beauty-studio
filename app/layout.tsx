@@ -3,10 +3,12 @@ import "./globals.css";
 import { display, body, script } from "./fonts";
 import { getContent } from "@/lib/content";
 import { getLogoAssets } from "@/lib/assets";
-import { siteUrl } from "@/lib/env";
+import { siteUrl, gaId } from "@/lib/env";
 import { SiteHeader } from "./components/SiteHeader";
 import { Footer } from "./components/Sections";
 import { ChromeSlot } from "./components/SiteChrome";
+import { Analytics } from "./components/Analytics";
+import { CookieConsent } from "./components/CookieConsent";
 
 export async function generateMetadata(): Promise<Metadata> {
   const c = await getContent();
@@ -67,6 +69,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ChromeSlot>
           <Footer c={c} logoUrl={logo.lockup} />
         </ChromeSlot>
+        {gaId && <Analytics gaId={gaId} />}
+        <CookieConsent />
       </body>
     </html>
   );

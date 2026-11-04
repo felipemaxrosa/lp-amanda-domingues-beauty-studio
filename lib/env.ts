@@ -26,3 +26,13 @@ export const siteUrl = (
     ? CANONICAL_URL
     : process.env.NEXT_PUBLIC_SITE_URL || CANONICAL_URL
 ).replace(/\/$/, "");
+
+/**
+ * ID do Google Analytics (GA4). Só ativo em PRODUÇÃO — dev/preview não poluem
+ * os dados. O id tem default no código, por isso não é preciso definir env var
+ * na Vercel (opcionalmente, NEXT_PUBLIC_GA_ID substitui-o). Lido só no servidor
+ * (layout), por isso pode usar VERCEL_ENV.
+ */
+export const gaId = (
+  process.env.VERCEL_ENV === "production" ? process.env.NEXT_PUBLIC_GA_ID || "G-DVECEY1JY7" : ""
+).trim();
