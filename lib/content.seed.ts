@@ -18,8 +18,8 @@ export const seedContent: SiteContent = {
       'https://www.fresha.com/pt/a/amandadominguesbeauty-coimbra-rua-joao-de-deus-ramos-146-d8kru9kb/booking?share=true&pId=3027852&employeeId=5455049&back=%2Fp%2Famanda-domingues-6492286',
     freshaProfile:
       'https://www.fresha.com/pt/p/amanda-domingues-6492286?share=true&pId=3027852',
-    instagram: 'https://instagram.com/amandadomingues.beauty',
-    instagramHandle: '@amandadomingues.beauty',
+    instagram: 'https://instagram.com/amanda.dominguesbeauty',
+    instagramHandle: '@amanda.dominguesbeauty',
     address: {
       line: 'Rua João de Deus Ramos 146',
       venue: 'Galeria Gira Solum, Piso 1, Sala 127',
