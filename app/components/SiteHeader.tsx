@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "./ui";
+import { TrackedLink } from "./TrackedLink";
+import { GA_EVENTS } from "@/lib/analytics";
 
 const LINKS = [
   { href: "/#servicos", label: "Serviços" },
@@ -46,10 +48,10 @@ export function SiteHeader({
               {l.label}
             </Link>
           ))}
-          <a className="btn btn-gold site-nav__cta" href={bookUrl} target="_blank" rel="noopener noreferrer">
+          <TrackedLink event={GA_EVENTS.agendarClick} eventParams={{ location: "header" }} className="btn btn-gold site-nav__cta" href={bookUrl} target="_blank" rel="noopener noreferrer">
             <Icon name="cal" />
             Agendar
-          </a>
+          </TrackedLink>
         </nav>
 
         <button
@@ -72,10 +74,10 @@ export function SiteHeader({
               {l.label}
             </Link>
           ))}
-          <a className="btn btn-gold" href={bookUrl} target="_blank" rel="noopener noreferrer">
+          <TrackedLink event={GA_EVENTS.agendarClick} eventParams={{ location: "header_menu" }} className="btn btn-gold" href={bookUrl} target="_blank" rel="noopener noreferrer">
             <Icon name="cal" />
             Agendar
-          </a>
+          </TrackedLink>
         </nav>
       )}
     </header>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getContent } from "@/lib/content";
 import { Check, Icon } from "../components/ui";
+import { TrackedLink } from "../components/TrackedLink";
+import { GA_EVENTS } from "@/lib/analytics";
 
 export const metadata: Metadata = {
   title: "Formação de Unhas — Molde F1 + Verniz Gel em Coimbra",
@@ -68,10 +70,10 @@ export default async function Formacoes() {
             ao último detalhe, com acompanhamento individual.
           </p>
           <div className="hero-cta mt-8 justify-center">
-            <a className="btn btn-gold" href={wa} {...ext}>
+            <TrackedLink event={GA_EVENTS.formacaoWhatsappClick} eventParams={{ location: "formacoes_hero" }} className="btn btn-gold" href={wa} {...ext}>
               <Icon name="wa" />
               Agenda a tua vaga
-            </a>
+            </TrackedLink>
           </div>
           <p className="mt-4 text-[.72rem] font-semibold uppercase tracking-[.28em] text-[var(--gold-ink)]">Vagas limitadas</p>
         </div>
@@ -145,10 +147,10 @@ export default async function Formacoes() {
             ))}
           </div>
           <div className="section-cta">
-            <a className="btn btn-gold" href={wa} {...ext}>
+            <TrackedLink event={GA_EVENTS.formacaoWhatsappClick} eventParams={{ location: "formacoes_precos" }} className="btn btn-gold" href={wa} {...ext}>
               <Icon name="wa" />
               Quero inscrever-me
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>
@@ -159,14 +161,14 @@ export default async function Formacoes() {
           <p className="script text-[clamp(1.8rem,4vw,2.6rem)]">Curso individual</p>
           <h2 className="max-w-[20ch]">Atenção total, evolução garantida.</h2>
           <div className="cta-center__btns hero-cta">
-            <a className="btn btn-gold" href={wa} {...ext}>
+            <TrackedLink event={GA_EVENTS.formacaoWhatsappClick} eventParams={{ location: "formacoes_fecho" }} className="btn btn-gold" href={wa} {...ext}>
               <Icon name="wa" />
               Falar no WhatsApp
-            </a>
-            <a className="btn btn-ghost" href={c.contact.instagram} {...ext}>
+            </TrackedLink>
+            <TrackedLink event={GA_EVENTS.instagramClick} eventParams={{ location: "formacoes" }} className="btn btn-ghost" href={c.contact.instagram} {...ext}>
               <Icon name="ig" />
               {c.contact.instagramHandle}
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </section>

@@ -3,13 +3,6 @@
 import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-    dataLayer?: unknown[];
-  }
-}
-
 const KEY = "cookie-consent";
 
 /** Lê a escolha guardada (client-only). Vazio = ainda não escolheu. */

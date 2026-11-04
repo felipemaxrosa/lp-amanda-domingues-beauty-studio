@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { PriceItem, SiteContent, IconName } from "@/lib/types";
 import { BrandLockup, Figure, Icon, Stars } from "./ui";
 import { ServiceIcon, type ServiceIconName } from "./ServiceIcon";
+import { TrackedLink } from "./TrackedLink";
+import { GA_EVENTS } from "@/lib/analytics";
 
 type P = { c: SiteContent };
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -29,14 +31,14 @@ export function Hero({ c, logoUrl }: P & { logoUrl?: string | null }) {
               atenção ao detalhe.
             </p>
             <div className="hero-cta">
-              <a className="btn btn-gold" href={book} {...ext}>
+              <TrackedLink event={GA_EVENTS.agendarClick} eventParams={{ location: "hero" }} className="btn btn-gold" href={book} {...ext}>
                 <Icon name="cal" />
                 Agendar
-              </a>
-              <a className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
+              </TrackedLink>
+              <TrackedLink event={GA_EVENTS.whatsappClick} eventParams={{ location: "hero" }} className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
                 <Icon name="wa" />
                 WhatsApp
-              </a>
+              </TrackedLink>
             </div>
             <p className="rating">
               <Stars /> <b>{c.stats.rating}</b> · {c.stats.appointments} atendimentos · {c.stats.clients} clientes
@@ -250,14 +252,14 @@ export function CtaBand({ c }: P) {
           {a.line}, {a.city} · {c.contact.hours.toLowerCase()}
         </p>
         <div className="hero-cta cta-center__btns">
-          <a className="btn btn-gold" href={book} {...ext}>
+          <TrackedLink event={GA_EVENTS.agendarClick} eventParams={{ location: "cta" }} className="btn btn-gold" href={book} {...ext}>
             <Icon name="cal" />
             Agendar
-          </a>
-          <a className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
+          </TrackedLink>
+          <TrackedLink event={GA_EVENTS.whatsappClick} eventParams={{ location: "cta" }} className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
             <Icon name="wa" />
             WhatsApp
-          </a>
+          </TrackedLink>
         </div>
         <Link className="cta-link" href="/contacto">
           Ver localização e contacto →
@@ -309,20 +311,20 @@ export function ContactSection({ c }: P) {
               <Icon name="ig" className="inline-ic" />
               <div>
                 <b>Instagram</b>
-                <a href={c.contact.instagram} {...ext}>
+                <TrackedLink event={GA_EVENTS.instagramClick} eventParams={{ location: "contacto" }} href={c.contact.instagram} {...ext}>
                   {c.contact.instagramHandle}
-                </a>
+                </TrackedLink>
               </div>
             </div>
             <div className="hero-cta mt-[1.2rem]">
-              <a className="btn btn-gold" href={book} {...ext}>
+              <TrackedLink event={GA_EVENTS.agendarClick} eventParams={{ location: "contacto" }} className="btn btn-gold" href={book} {...ext}>
                 <Icon name="cal" />
                 Agendar
-              </a>
-              <a className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
+              </TrackedLink>
+              <TrackedLink event={GA_EVENTS.whatsappClick} eventParams={{ location: "contacto" }} className="btn btn-ghost" href={c.contact.whatsapp} {...ext}>
                 <Icon name="wa" />
                 WhatsApp
-              </a>
+              </TrackedLink>
             </div>
           </div>
           <div className="contact-map">
@@ -371,15 +373,15 @@ export function Footer({ c, logoUrl }: P & { logoUrl?: string | null }) {
           </div>
           <div className="col">
             <span className="lbl">Siga / agende</span>
-            <a href={c.contact.instagram} {...ext}>
+            <TrackedLink event={GA_EVENTS.instagramClick} eventParams={{ location: "footer" }} href={c.contact.instagram} {...ext}>
               <Icon name="ig" className="inline-ic" /> {c.contact.instagramHandle}
-            </a>
-            <a href={book} {...ext}>
+            </TrackedLink>
+            <TrackedLink event={GA_EVENTS.agendarClick} eventParams={{ location: "footer" }} href={book} {...ext}>
               Agendar no Fresha
-            </a>
-            <a href={c.contact.whatsapp} {...ext}>
+            </TrackedLink>
+            <TrackedLink event={GA_EVENTS.whatsappClick} eventParams={{ location: "footer" }} href={c.contact.whatsapp} {...ext}>
               WhatsApp
-            </a>
+            </TrackedLink>
           </div>
         </div>
       </div>
